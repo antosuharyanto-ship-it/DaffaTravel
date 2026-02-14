@@ -7,13 +7,18 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#0F766E', // Teal-700
-                secondary: '#F59E0B', // Amber-500
-                accent: '#14B8A6', // Teal-500
-                background: '#F0FDF4', // Green-50
+                primary: '#0F766E', // Deep Teal
+                secondary: '#F59E0B', // Rich Gold/Amber
+                accent: '#14B8A6', // Bright Teal
+                background: '#F8FAFC', // Slate-50
+                surface: '#FFFFFF',
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
+                sans: ['Montserrat', 'sans-serif'],
+                serif: ['Playfair Display', 'serif'],
+            },
+            boxShadow: {
+                'glass': '0 8px 32px 0 rgba(15, 118, 110, 0.1)',
             }
         },
     },

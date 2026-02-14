@@ -1,10 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #0F766E;
+  --secondary: #F59E0B;
+  --accent: #14B8A6;
+  --background: #F8FAFC;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+}
+
 @layer base {
   body {
-    @apply bg-background text-gray-900 font-sans;
+    @apply bg-[var(--background)] text-slate-900 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-slate-950 font-bold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-white rounded-xl font-semibold shadow-lg hover:shadow-primary/30 transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-secondary text-white rounded-xl font-semibold shadow-lg hover:shadow-secondary/30 transform hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  .glass-card {
+    @apply bg-[var(--glass)] backdrop-blur-md border border-[var(--glass-border)] shadow-xl rounded-2xl;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl mb-6 relative inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    @apply absolute -bottom-3 left-0 w-2/3 h-1 bg-secondary rounded-full;
   }
 }
 
@@ -12,13 +55,16 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--primary);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #0d5c56;
 }

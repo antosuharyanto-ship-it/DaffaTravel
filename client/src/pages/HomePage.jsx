@@ -1,13 +1,71 @@
+import { useEffect, useState } from 'react';
+import api from '../utils/api';
+import Hero from '../components/Hero';
+import CategorySection from '../components/CategorySection';
+import WhyChooseUs from '../components/WhyChooseUs';
+import CampaignSpotlight from '../components/CampaignSpotlight';
+import PackageCard from '../components/PackageCard';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
+    const [featuredPackages, setFeaturedPackages] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPackages = async () => {
+            try {
+                const res = await api.get('/packages');
+                // Just take the first 3 for the home page feature
+                setFeaturedPackages(res.data.slice(0, 3));
+            } catch (error) {
+                console.error("Error fetching packages", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchPackages();
+    }, []);
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
-            <h1 className="text-4xl font-bold text-primary">Welcome to Daffa Tour & Travel</h1>
-            <p className="text-lg text-gray-600">Your trusted partner for Umrah, Hajj, and Holiday packages.</p>
-            <Link to="/packages" className="px-6 py-2 text-white rounded-lg bg-secondary hover:bg-yellow-600 transition">
-                Explore Packages
-            </Link>
+        <div className="pb-20">
+            <Hero />
+            <CategorySection />
+            <WhyChooseUs />
+            <CampaignSpotlight />
+
+            <section className="container mx-auto px-4 py-24">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h2 className="section-title">Featured Packages</h2>
+                    <p className="text-lg text-slate-600 leading-relaxed">
+                        Handpicked journeys designed to provide comfort, spirituality, and unforgettable adventure.
+                    </p>
+                </div>
+
+                {loading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {[1, 2, 3].map(n => (
+                            <div key={n} className="h-96 bg-slate-100 animate-pulse rounded-3xl"></div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {featuredPackages.map((pkg) => (
+                            <PackageCard key={pkg.id} pkg={pkg} />
+                        ))}
+                        {featuredPackages.length === 0 && (
+                            <div className="col-span-full text-center py-12 text-slate-400 font-serif text-xl border-2 border-dashed border-slate-200 rounded-3xl">
+                                More exciting packages coming soon!
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                <div className="mt-16 text-center">
+                    <Link to="/packages" className="btn-primary">
+                        View All Packages
+                    </Link>
+                </div>
+            </section>
         </div>
     );
 };
