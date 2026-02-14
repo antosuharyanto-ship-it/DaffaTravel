@@ -2,8 +2,8 @@ name: Automated Cold Storage to GDrive
 
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    branches: [ main, master ] # Berjalan jika ada update di branch main atau master
+  workflow_dispatch:          # Memungkinkan tombol "Run workflow" manual
 
 jobs:
   backup-to-gdrive:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Mengambil seluruh riwayat jika diperlukan
 
       - name: Install Rclone
         run: sudo apt-get install -y rclone
@@ -22,6 +22,6 @@ jobs:
           mkdir -p ~/.config/rclone
           echo "${{ secrets.RCLONE_CONF }}" > ~/.config/rclone/rclone.conf
 
-       - name: Sync to Google Drive
+      - name: Sync to Google Drive
         run: |
           rclone sync . "Gdrive:GitHub_Backup/${{ github.event.repository.name }}" --exclude ".git/**" --verbose
