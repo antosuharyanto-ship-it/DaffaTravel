@@ -1,0 +1,28 @@
+name: Automated Cold Storage to GDrive
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  backup-to-gdrive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Rclone
+        run: sudo apt-get install -y rclone
+
+      - name: Configure Rclone
+        run: |
+          mkdir -p ~/.config/rclone
+          echo "${{ secrets.RCLONE_CONF }}" > ~/.config/rclone/rclone.conf
+
+      - name: Sync to Google Drive
+        run: |
+          # Sekarang menggunakan nama gdrive tanpa tanda petik
+          rclone sync . Gdrive:GitHub_Backup/${{ github.event.repository.name }} --exclude ".git/**" --verbose
