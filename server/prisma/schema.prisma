@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  AGENT
+  CUSTOMER
+}
+
+enum PackageType {
+  UMRAH
+  HAJJ
+  HOLIDAY
+  OTHER
+}
+
+enum TransactionStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  FAILED
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(CUSTOMER)
+  branchId  Int?
+  branch    Branch?  @relation(fields: [branchId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bookings  Booking[]
+}
+
+model Branch {
+  id        Int      @id @default(autoincrement())
+  name      String
+  location  String
+  contact   String
+  agents    User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Package {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  price       Decimal     @db.Decimal(10, 2)
+  type        PackageType
+  duration    String      // e.g., "9 Days"
+  startDate   DateTime
+  endDate     DateTime
+  availableSlots Int
+  image       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  bookings    Booking[]
+}
+
+model Booking {
+  id            Int               @id @default(autoincrement())
+  userId        Int
+  user          User              @relation(fields: [userId], references: [id])
+  packageId     Int
+  package       Package           @relation(fields: [packageId], references: [id])
+  bookingDate   DateTime          @default(now())
+  status        TransactionStatus @default(PENDING)
+  totalAmount   Decimal           @db.Decimal(10, 2)
+  paymentProof  String?
+  updatedAt     DateTime          @updatedAt
+}
