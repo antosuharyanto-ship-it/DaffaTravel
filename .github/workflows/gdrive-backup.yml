@@ -22,7 +22,6 @@ jobs:
           mkdir -p ~/.config/rclone
           echo "${{ secrets.RCLONE_CONF }}" > ~/.config/rclone/rclone.conf
 
-      - name: Sync to Google Drive
+       - name: Sync to Google Drive
         run: |
-          # Sekarang menggunakan nama gdrive tanpa tanda petik
-          rclone sync . Gdrive:GitHub_Backup/${{ github.event.repository.name }} --exclude ".git/**" --verbose
+          rclone sync . "Gdrive:GitHub_Backup/${{ github.event.repository.name }}" --exclude ".git/**" --verbose
