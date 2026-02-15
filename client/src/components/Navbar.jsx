@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, User, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import logo from '../assets/logo/daffa_logo_main.png';
+import logo from '../assets/logo.jpg';
 
 const Navbar = () => {
     const { user, logout } = useAuth();

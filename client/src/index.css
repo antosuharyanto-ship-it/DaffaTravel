@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700;900&display=swap');
+@import "tailwindcss";
 
 @theme {
   --color-primary: #0F766E;
@@ -43,7 +43,7 @@
   }
 
   .glass-card {
-    @apply bg-[var(--glass)] backdrop-blur-md border border-[var(--glass-border)] shadow-xl rounded-2xl;
+    @apply bg-slate-900/40 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-[2.5rem];
   }
 
   .section-title {
