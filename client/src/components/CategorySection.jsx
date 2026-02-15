@@ -6,6 +6,8 @@ const categories = [
     {
         id: 'umrah',
         title: 'Umrah Packages',
+        subtitle: 'باقات العمرة',
+        indonesian: 'Paket Umrah Premium',
         description: 'Spiritual journeys to the holy cities with premium stay and guidance.',
         icon: '🕋',
         bg: umrahBg,
@@ -14,14 +16,18 @@ const categories = [
     {
         id: 'hajj',
         title: 'Hajj Special',
+        subtitle: 'حج مخصص',
+        indonesian: 'Haji Khusus & Furoda',
         description: 'Complete Hajj experience with dedicated support and elite facilities.',
         icon: '🌙',
-        bg: umrahBg, // Reusing Umrah bg for Hajj for now
+        bg: umrahBg,
         path: '/packages?category=HAJJ'
     },
     {
         id: 'holiday',
         title: 'Luxury Holidays',
+        subtitle: 'عطلات فاخرة',
+        indonesian: 'Wisata Halal Mancanegara',
         description: 'Explore the world’s most beautiful destinations in style.',
         icon: '✈️',
         bg: holidayBg,
@@ -51,9 +57,13 @@ const CategorySection = () => {
                             <div className="w-14 h-14 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                                 {cat.icon}
                             </div>
-                            <h3 className="text-3xl font-serif text-white mb-2 tracking-tight group-hover:text-secondary transition-colors duration-300">
-                                {cat.title}
-                            </h3>
+                            <div className="space-y-1 mb-2">
+                                <span className="block text-xs font-bold text-secondary uppercase tracking-[0.2em]">{cat.subtitle}</span>
+                                <h3 className="text-2xl font-serif text-white font-black tracking-tight group-hover:text-secondary transition-colors duration-300">
+                                    {cat.title}
+                                </h3>
+                                <span className="block text-[10px] text-white/60 font-medium italic">{cat.indonesian}</span>
+                            </div>
                             <p className="text-slate-300 text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
                                 {cat.description}
                             </p>

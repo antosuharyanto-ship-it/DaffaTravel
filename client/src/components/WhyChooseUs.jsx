@@ -31,12 +31,19 @@ const WhyChooseUs = () => {
                 <div className="flex flex-col lg:flex-row items-center gap-20">
                     <div className="lg:w-1/2 space-y-10">
                         <div className="space-y-4">
-                            <h4 className="text-secondary font-bold tracking-[0.3em] uppercase text-sm">Experience Excellence</h4>
-                            <h2 className="text-5xl md:text-7xl font-serif font-black leading-tight tracking-tighter">
-                                Find Your <span className="text-secondary italic">Inner Peace</span> with Us
-                            </h2>
+                            <h4 className="text-secondary font-black tracking-[0.3em] uppercase text-[10px] md:text-sm animate-fade-in flex items-center gap-3">
+                                <span>Experience Excellence</span>
+                                <span className="w-6 h-[1px] bg-secondary/30"></span>
+                                <span className="text-secondary/80">Keunggulan Layanan</span>
+                            </h4>
+                            <div className="space-y-2">
+                                <span className="block text-2xl md:text-4xl font-normal text-white/60 font-arabic" dir="rtl">لماذا تختارنا؟</span>
+                                <h2 className="text-5xl md:text-7xl font-serif font-black leading-tight tracking-tighter text-white">
+                                    Find Your <span className="text-secondary italic">Inner Peace</span> with Us
+                                </h2>
+                            </div>
                         </div>
-                        <p className="text-slate-400 text-xl max-w-lg leading-relaxed font-light">
+                        <p className="text-slate-400 text-lg md:text-xl max-w-lg leading-relaxed font-light">
                             We go beyond booking flights and hotels. We provide a sacred journey crafted with care, expertise, and a commitment to your spiritual well-being.
                         </p>
                         <button className="group flex items-center space-x-4 text-white hover:text-secondary transition-colors duration-300">

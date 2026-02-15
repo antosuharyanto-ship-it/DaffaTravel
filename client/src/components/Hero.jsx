@@ -17,13 +17,16 @@ const Hero = () => {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-4xl space-y-8">
                     <div className="space-y-4">
-                        <h2 className="text-secondary font-bold tracking-[0.4em] uppercase text-xs md:text-sm animate-fade-in">
-                            A Journey of Serenity & Devotion
+                        <h2 className="text-secondary font-black tracking-[0.4em] uppercase text-[10px] md:text-sm animate-fade-in flex flex-col md:flex-row md:items-center gap-4">
+                            <span>A Journey of Serenity & Devotion</span>
+                            <span className="hidden md:block w-8 h-[1px] bg-secondary/30"></span>
+                            <span className="text-secondary/80">Langkah Spiritual Menuju Ridho Ilahi</span>
                         </h2>
-                        <h1 className="text-6xl md:text-8xl font-serif text-white leading-tight animate-slide-up">
-                            A Way to Talk to <span className="text-secondary italic">Allah SWT</span>
+                        <h1 className="text-5xl md:text-8xl font-serif text-white leading-tight animate-slide-up flex flex-col">
+                            <span className="text-3xl md:text-5xl mb-4 font-normal opacity-90 font-arabic" dir="rtl">طريقك للتقرب إلى الله</span>
+                            <span>A Way to Talk to <span className="text-secondary italic">Allah SWT</span></span>
                         </h1>
-                        <p className="text-lg md:text-xl text-slate-200 font-light max-w-2xl leading-relaxed animate-fade-in delay-200">
+                        <p className="text-lg md:text-xl text-slate-100 font-light max-w-2xl leading-relaxed animate-fade-in delay-200">
                             Experience spiritual peace and holistic care. We craft every detail of your Umrah & Hajj journey so you can focus on what truly matters—your connection with the Divine.
                         </p>
                     </div>
