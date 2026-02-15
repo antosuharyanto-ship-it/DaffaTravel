@@ -37,9 +37,9 @@ const HomePage = () => {
 
             <section className="container mx-auto px-4 py-24">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="section-title">Featured Packages</h2>
+                    <h2 className="section-title">{t('home.featuredTitle')}</h2>
                     <p className="text-lg text-slate-600 leading-relaxed">
-                        Handpicked journeys designed to provide comfort, spirituality, and unforgettable adventure.
+                        {t('home.featuredDesc')}
                     </p>
                 </div>
 
@@ -56,7 +56,7 @@ const HomePage = () => {
                         ))}
                         {featuredPackages.length === 0 && (
                             <div className="col-span-full text-center py-12 text-slate-400 font-serif text-xl border-2 border-dashed border-slate-200 rounded-3xl">
-                                More exciting packages coming soon!
+                                {t('home.noPackages')}
                             </div>
                         )}
                     </div>
@@ -64,7 +64,7 @@ const HomePage = () => {
 
                 <div className="mt-16 text-center">
                     <Link to="/packages" className="btn-primary">
-                        View All Packages
+                        {t('home.viewAll')}
                     </Link>
                 </div>
             </section>

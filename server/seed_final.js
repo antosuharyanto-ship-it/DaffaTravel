@@ -97,6 +97,30 @@ async function seed() {
         await prisma.package.create({ data: pkg });
         console.log(`Created package: ${pkg.title}`);
     }
+
+    console.log("Seeding Admin Users...");
+    const bcrypt = require('bcryptjs');
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+
+    const adminEmails = [
+        'esuhsuh@ericsson.com',
+        'anto.suharyanto@gmail.com'
+    ];
+
+    for (const email of adminEmails) {
+        await prisma.user.upsert({
+            where: { email },
+            update: { role: 'ADMIN' },
+            create: {
+                email,
+                name: email.split('@')[0],
+                password: hashedPassword,
+                role: 'ADMIN'
+            }
+        });
+        console.log(`Admin user seeded: ${email} / admin123`);
+    }
+
     console.log("Reset and Seeding complete.");
 }
 

@@ -8,6 +8,7 @@ export const translations = {
             login: 'Login',
             register: 'Register',
             dashboard: 'Dashboard',
+            admin: 'Admin',
             logout: 'Logout'
         },
         hero: {
@@ -19,6 +20,12 @@ export const translations = {
             searchPlaceholder: 'Where to go?',
             categoryPlaceholder: 'All Packages',
             searchButton: 'Search'
+        },
+        home: {
+            featuredTitle: 'Featured Packages',
+            featuredDesc: 'Handpicked journeys designed to provide comfort, spirituality, and unforgettable adventure.',
+            noPackages: 'More exciting packages coming soon!',
+            viewAll: 'View All Packages'
         },
         whyChooseUs: {
             tag: 'Experience Excellence',
@@ -128,6 +135,7 @@ export const translations = {
             login: 'Masuk',
             register: 'Daftar',
             dashboard: 'Dasbor',
+            admin: 'Admin',
             logout: 'Keluar'
         },
         hero: {
@@ -139,6 +147,12 @@ export const translations = {
             searchPlaceholder: 'Ke mana?',
             categoryPlaceholder: 'Semua Paket',
             searchButton: 'Cari'
+        },
+        home: {
+            featuredTitle: 'Paket Unggulan',
+            featuredDesc: 'Perjalanan pilihan yang dirancang untuk memberikan kenyamanan, spiritualitas, dan petualangan yang tak terlupakan.',
+            noPackages: 'Paket menarik lainnya akan segera hadir!',
+            viewAll: 'Lihat Semua Paket'
         },
         whyChooseUs: {
             tag: 'Pengalaman Unggulan',
@@ -248,6 +262,7 @@ export const translations = {
             login: 'تسجيل دخول',
             register: 'تسجيل',
             dashboard: 'لوحة التحكم',
+            admin: 'مشرف',
             logout: 'تسجيل خروج'
         },
         hero: {
@@ -259,6 +274,12 @@ export const translations = {
             searchPlaceholder: 'إلى أين؟',
             categoryPlaceholder: 'كل الباقات',
             searchButton: 'بحث'
+        },
+        home: {
+            featuredTitle: 'الباقات المميزة',
+            featuredDesc: 'رحلات مختارة بعناية مصممة لتوفير الراحة والروحانية والمغامرة التي لا تُنسى.',
+            noPackages: 'المزيد من الباقات المثيرة قريباً!',
+            viewAll: 'عرض كل الباقات'
         },
         whyChooseUs: {
             tag: 'تجربة التميز',

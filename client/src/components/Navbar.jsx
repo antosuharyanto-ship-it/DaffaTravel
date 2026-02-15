@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Menu, X, User, LogOut, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import logo from '../assets/logo.jpg';
 import { useLanguage } from '../context/LanguageContext';
@@ -78,6 +78,16 @@ const Navbar = () => {
                                     <User size={18} />
                                     <span>{user.name}</span>
                                 </Link>
+                                {user.role === 'ADMIN' && (
+                                    <Link
+                                        to="/admin"
+                                        className={`flex items-center space-x-2 text-sm font-semibold tracking-wide uppercase ${scrolled || !isHome ? 'text-secondary' : 'text-white hover:text-secondary'
+                                            }`}
+                                    >
+                                        <ShieldCheck size={18} />
+                                        <span>{t('nav.admin')}</span>
+                                    </Link>
+                                )}
                                 <button
                                     onClick={logout}
                                     className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
@@ -139,6 +149,12 @@ const Navbar = () => {
                                     <User size={20} />
                                     <span>{user.name}'s Dashboard</span>
                                 </Link>
+                                {user.role === 'ADMIN' && (
+                                    <Link to="/admin" className="flex items-center space-x-2 text-secondary font-bold" onClick={() => setIsOpen(false)}>
+                                        <ShieldCheck size={20} />
+                                        <span>{t('nav.admin')}</span>
+                                    </Link>
+                                )}
                                 <button onClick={() => { logout(); setIsOpen(false); }} className="flex items-center space-x-2 text-red-500 font-semibold uppercase tracking-wider text-sm">
                                     <LogOut size={20} />
                                     <span>Logout Account</span>
@@ -165,7 +181,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 };
 
