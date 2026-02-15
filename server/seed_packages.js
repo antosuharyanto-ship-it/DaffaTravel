@@ -39,16 +39,40 @@ const packages = [
         flyerImage: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80"
     },
     {
-        title: "Wisata Malaysia - Kuala Lumpur",
-        description: "Paket wisata hemat ke Malaysia. Termasuk Genting Highlands dan City Tour.",
-        price: 6500000,
-        type: "HOLIDAY",
-        duration: "4 Hari",
-        startDate: new Date("2024-08-15"),
-        endDate: new Date("2024-08-19"),
-        availableSlots: 40,
+        title: "Umroh Ramadhan 03 Maret 2026",
+        description: "Paket Umroh penuh berkah di bulan Ramadhan 2026. Fasilitas lengkap dengan bimbingan ibadah.",
+        price: 32750000,
+        type: "UMRAH",
+        duration: "12 Hari",
+        startDate: new Date("2026-03-03"),
+        endDate: new Date("2026-03-15"),
+        availableSlots: 30,
         hotelStars: 4,
-        flyerImage: "https://images.unsplash.com/photo-1529626455594-4ff0832cfb5e?auto=format&fit=crop&q=80"
+        flyerImage: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&q=80"
+    },
+    {
+        title: "Wisata Bangkok Awal Februari 2024",
+        description: "Nikmati keindahan kota Bangkok di awal tahun. Paket wisata kuliner dan belanja.",
+        price: 8500000,
+        type: "HOLIDAY",
+        duration: "5 Hari",
+        startDate: new Date("2024-02-05"),
+        endDate: new Date("2024-02-10"),
+        availableSlots: 20,
+        hotelStars: 5,
+        flyerImage: "https://images.unsplash.com/photo-1508933254924-8960091ca97e?auto=format&fit=crop&q=80"
+    },
+    {
+        title: "Wisata Jepang Murah",
+        description: "Jelajahi keajaiban Jepang dengan harga terjangkau. Tokyo, Kyoto, dan Osaka.",
+        price: 8000000,
+        type: "HOLIDAY",
+        duration: "7 Hari",
+        startDate: new Date("2024-09-10"),
+        endDate: new Date("2024-09-17"),
+        availableSlots: 15,
+        hotelStars: 5,
+        flyerImage: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80"
     }
 ];
 
