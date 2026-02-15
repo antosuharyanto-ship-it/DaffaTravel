@@ -3,23 +3,24 @@ import heroBg from '../assets/hero_bg.jpg';
 
 const Hero = () => {
     return (
-        <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
+        <section className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden">
+            <div className="lightning-strike animate-lightning"></div>
             {/* Background Image with Overlay */}
             <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 transform scale-105 hover:scale-100"
+                className="absolute inset-0 bg-cover bg-[center_top] bg-no-repeat transition-transform duration-1000 transform scale-105"
                 style={{ backgroundImage: `url(${heroBg})` }}
             >
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-900/80"></div>
             </div>
 
             {/* Content Container */}
             <div className="container mx-auto px-4 relative z-10">
                 <div className="max-w-4xl space-y-8">
                     <div className="space-y-4">
-                        <h2 className="text-secondary font-bold tracking-[0.2em] uppercase text-sm md:text-base animate-fade-in">
+                        <h2 className="text-secondary font-bold tracking-[0.4em] uppercase text-xs md:text-sm animate-fade-in">
                             A Journey of Serenity & Devotion
                         </h2>
-                        <h1 className="text-5xl md:text-7xl font-serif text-white leading-tight animate-slide-up">
+                        <h1 className="text-6xl md:text-8xl font-serif text-white leading-tight animate-slide-up">
                             A Way to Talk to <span className="text-secondary italic">Allah SWT</span>
                         </h1>
                         <p className="text-lg md:text-xl text-slate-200 font-light max-w-2xl leading-relaxed animate-fade-in delay-200">
@@ -27,25 +28,26 @@ const Hero = () => {
                         </p>
                     </div>
                     {/* Search Bar / CTA Area */}
-                    <div className="glass-card p-2 md:p-3 mt-10 max-w-2xl flex flex-col md:flex-row gap-4">
-                        <div className="flex-1 px-4 py-2 border-b md:border-b-0 md:border-r border-slate-200/20">
-                            <label className="block text-xs uppercase tracking-widest text-slate-400 mb-1">Destination</label>
+                    <div className="glass-card p-3 mt-12 max-w-3xl flex flex-col md:flex-row gap-4 items-center">
+                        <div className="flex-1 px-6 py-2 w-full">
+                            <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-1">Destination</label>
                             <input
                                 type="text"
                                 placeholder="Where to go?"
-                                className="bg-transparent w-full focus:outline-none text-white placeholder-slate-500"
+                                className="bg-transparent w-full focus:outline-none text-white placeholder-slate-500 font-medium"
                             />
                         </div>
-                        <div className="flex-1 px-4 py-2">
-                            <label className="block text-xs uppercase tracking-widest text-slate-400 mb-1">Category</label>
-                            <select className="bg-transparent w-full focus:outline-none text-white appearance-none">
+                        <div className="w-px h-10 bg-slate-100/10 hidden md:block"></div>
+                        <div className="flex-1 px-6 py-2 w-full">
+                            <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-1">Category</label>
+                            <select className="bg-transparent w-full focus:outline-none text-white appearance-none font-medium">
                                 <option className="bg-slate-900">All Packages</option>
                                 <option className="bg-slate-900">Umrah</option>
                                 <option className="bg-slate-900">Hajj</option>
                                 <option className="bg-slate-900">Holiday</option>
                             </select>
                         </div>
-                        <button className="btn-secondary rounded-lg px-8 py-3 w-full md:w-auto">
+                        <button className="bg-secondary hover:bg-amber-600 text-white px-10 py-4 rounded-2xl font-bold uppercase tracking-widest text-sm shadow-2xl transition-all duration-300 w-full md:w-auto">
                             Search
                         </button>
                     </div>
