@@ -1,6 +1,7 @@
 import React from 'react';
 import heroBg from '../assets/hero_bg.jpg';
 import { useLanguage } from '../context/LanguageContext';
+import { ArrowRight, MapPin, Compass } from 'lucide-react';
 
 const Hero = () => {
     const { t, language } = useLanguage();
