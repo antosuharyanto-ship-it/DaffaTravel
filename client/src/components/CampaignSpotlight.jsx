@@ -37,21 +37,22 @@ const CampaignSpotlight = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     {campaigns.map((camp, idx) => (
                         <div key={idx} className="group relative">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-3xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
-                            <div className="relative glass-card !bg-slate-50 p-8 h-full flex flex-col hover:translate-y-[-8px] transition-all duration-300">
-                                <div className={`w-12 h-12 ${camp.color} text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg`}>
+                            <div className="absolute -inset-2 bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                            <div className="relative glass-card !bg-white border-white/40 p-10 h-full flex flex-col hover:translate-y-[-12px] transition-all duration-500 shadow-sm hover:shadow-2xl">
+                                <div className={`w-16 h-16 ${camp.color} text-white rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl shadow-inner transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
                                     {camp.icon}
                                 </div>
-                                <div className="text-xs font-bold text-secondary uppercase tracking-widest mb-2">{camp.month}</div>
-                                <h4 className="text-xl font-bold mb-4 text-slate-800">{camp.title}</h4>
-                                <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-1 italic">
+                                <div className="text-[10px] font-black text-secondary uppercase tracking-[0.3em] mb-3">{camp.month}</div>
+                                <h4 className="text-2xl font-serif font-black mb-4 text-slate-900 group-hover:text-primary transition-colors">{camp.title}</h4>
+                                <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-1 font-light italic opacity-80 group-hover:opacity-100">
                                     "{camp.description}"
                                 </p>
-                                <button className="text-primary font-bold text-sm flex items-center group-hover:underline">
-                                    View Campaign Details <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                                <button className="group/link w-fit flex items-center text-primary font-bold text-xs uppercase tracking-widest relative">
+                                    <span>Explore Intent</span>
+                                    <div className="ml-3 h-[1px] w-6 bg-primary/30 group-hover/link:w-10 group-hover/link:bg-primary transition-all duration-500"></div>
                                 </button>
                             </div>
                         </div>

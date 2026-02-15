@@ -15,10 +15,12 @@ const HomePage = () => {
         const fetchPackages = async () => {
             try {
                 const res = await api.get('/packages');
-                // Just take the first 3 for the home page feature
-                setFeaturedPackages(res.data.slice(0, 3));
+                // Ensure res.data is an array before slicing
+                const packagesData = Array.isArray(res.data) ? res.data : [];
+                setFeaturedPackages(packagesData.slice(0, 3));
             } catch (error) {
                 console.error("Error fetching packages", error);
+                setFeaturedPackages([]);
             } finally {
                 setLoading(false);
             }

@@ -26,8 +26,16 @@ const Navbar = () => {
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex justify-between items-center">
                     <Link to="/" className="flex items-center space-x-4 group">
-                        <div className="h-12 w-12 md:h-16 md:w-16 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-105 transition-all duration-500 bg-white p-1.5 ring-1 ring-slate-100">
-                            <img src={logo} alt="Daffa Travel Logo" className="h-full w-full object-contain" />
+                        <div
+                            className="h-12 w-12 md:h-16 md:w-16 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-105 transition-all duration-500 bg-white p-1.5 ring-1 ring-slate-100 flex-shrink-0"
+                            style={{ minWidth: '48px', minHeight: '48px' }}
+                        >
+                            <img
+                                src={logo}
+                                alt="Daffa Travel Logo"
+                                className="h-full w-full object-contain"
+                                style={{ maxHeight: '100%', maxWidth: '100%' }}
+                            />
                         </div>
                         <div className="flex flex-col">
                             <span className={`text-xl md:text-3xl font-serif font-black tracking-[-0.04em] leading-none ${scrolled || !isHome ? 'text-slate-900' : 'text-white'

@@ -30,36 +30,42 @@ const PackageCard = ({ pkg }) => {
             </div>
 
             {/* Content Section */}
-            <div className="p-5 flex flex-col flex-1 bg-white">
-                <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+            <div className="p-6 flex flex-col flex-1 bg-white relative">
+                <div className="mb-4">
+                    <h3 className="text-xl font-serif font-black text-slate-900 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-tight">
                         {pkg.title}
                     </h3>
                 </div>
 
-                <div className="flex items-center space-x-4 mb-4 text-slate-500 text-[11px] font-medium">
-                    <div className="flex items-center">
-                        <Clock size={14} className="mr-1.5 text-secondary" />
+                <div className="flex items-center gap-4 mb-6 text-slate-500 text-[10px] font-bold uppercase tracking-widest">
+                    <div className="flex items-center px-2 py-1 bg-slate-50 rounded-md">
+                        <Clock size={12} className="mr-2 text-secondary" />
                         <span>{pkg.duration}</span>
                     </div>
-                    <div className="flex items-center">
-                        <Users size={14} className="mr-1.5 text-secondary" />
-                        <span>{pkg.availableSlots} Sisa</span>
+                    <div className="flex items-center px-2 py-1 bg-slate-50 rounded-md">
+                        <Users size={12} className="mr-2 text-secondary" />
+                        <span>{pkg.availableSlots} Left</span>
                     </div>
                 </div>
 
-                <div className="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                <div className="mt-auto pt-6 border-t border-slate-100 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="text-[10px] text-slate-400 font-bold uppercase">Mulai Dari</span>
-                        <div className="text-xl font-black text-primary">
-                            Rp {new Intl.NumberFormat('id-ID').format(pkg.price)}
+                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Investment</span>
+                        <div className="text-2xl font-serif font-black text-primary flex items-baseline">
+                            <span className="text-xs mr-1 opacity-50">Rp</span>
+                            {new Intl.NumberFormat('id-ID').format(pkg.price)}
                         </div>
                     </div>
                     <Link
                         to={`/packages/${pkg.id}`}
-                        className="p-3 bg-slate-900 text-white rounded-xl hover:bg-primary transition-all group/btn"
+                        className="group/btn relative overflow-hidden bg-slate-900 text-white p-4 rounded-2xl hover:bg-primary transition-all duration-500"
                     >
-                        <ArrowRight size={20} className="transform group-hover/btn:translate-x-1 transition-transform" />
+                        <div className="relative z-10 flex items-center">
+                            <span className="max-w-0 overflow-hidden group-hover/btn:max-w-xs group-hover/btn:mr-2 transition-all duration-500 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
+                                Reserve
+                            </span>
+                            <ArrowRight size={20} className="transform group-hover/btn:translate-x-1 transition-transform" />
+                        </div>
                     </Link>
                 </div>
             </div>

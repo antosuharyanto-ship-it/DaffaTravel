@@ -7,10 +7,10 @@ const Hero = () => {
             <div className="lightning-strike animate-lightning"></div>
             {/* Background Image with Overlay */}
             <div
-                className="absolute inset-0 bg-cover bg-[center_top] bg-no-repeat transition-transform duration-1000 transform scale-105"
+                className="absolute inset-0 bg-cover bg-[center_top] bg-no-repeat transition-transform duration-1000 transform scale-105 bg-slate-950"
                 style={{ backgroundImage: `url(${heroBg})` }}
             >
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-900/80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-slate-900/90"></div>
             </div>
 
             {/* Content Container */}

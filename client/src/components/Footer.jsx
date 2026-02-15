@@ -8,37 +8,37 @@ const Footer = () => {
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     {/* Brand Column */}
-                    <div className="space-y-6">
-                        <Link to="/" className="flex items-center space-x-3">
-                            <div className="h-12 w-12 rounded-xl overflow-hidden bg-white p-1">
+                    <div className="space-y-8">
+                        <Link to="/" className="flex items-center space-x-4">
+                            <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white p-2 shadow-2xl">
                                 <img src={logo} alt="Daffa Travel" className="h-full w-full object-contain" />
                             </div>
                             <div className="flex flex-col">
-                                <span className="text-xl font-serif font-black tracking-tighter leading-none">
-                                    DAFFA <span className="text-secondary">TOUR</span>
+                                <span className="text-2xl font-serif font-black tracking-[-0.05em] leading-none">
+                                    DAFFA <span className="text-secondary italic">TOUR</span>
                                 </span>
-                                <span className="text-[10px] text-slate-400 font-bold tracking-widest uppercase">
+                                <span className="text-[10px] text-slate-400 font-black tracking-[0.4em] uppercase">
                                     & TRAVEL
                                 </span>
                             </div>
                         </Link>
-                        <div className="space-y-1">
-                            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">
+                        <div className="space-y-4">
+                            <p className="text-secondary text-[10px] font-black uppercase tracking-[0.2em]">
                                 PT. Andity Kreasi Mandiri
                             </p>
-                            <p className="text-slate-400 text-sm leading-relaxed">
-                                Merupakan biro perjalanan ibadah Umroh & Haji dengan berbagai pilihan paket yang bisa di sesuaikan dengan budget dan waktu keberangkatan anda dan keluarga.
+                            <p className="text-slate-400 text-sm leading-relaxed font-light">
+                                Experience spiritual serenity with Indonesia's premier Umrah & Hajj agency. We craft every detail of your journey with devotion and excellence.
                             </p>
                         </div>
-                        <div className="flex space-x-4">
-                            <a href="https://www.facebook.com/daffatour" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-secondary transition-colors text-white">
-                                <Facebook size={18} />
+                        <div className="flex space-x-5">
+                            <a href="https://www.facebook.com/daffatour" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 text-white shadow-xl">
+                                <Facebook size={20} />
                             </a>
-                            <a href="https://www.instagram.com/daffa.umrah/" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-secondary transition-colors text-white">
-                                <Instagram size={18} />
+                            <a href="https://www.instagram.com/daffa.umrah/" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 text-white shadow-xl">
+                                <Instagram size={20} />
                             </a>
-                            <a href="https://wa.me/6287768062507" className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center hover:opacity-80 transition-colors text-white">
-                                <Phone size={18} />
+                            <a href="https://wa.me/6287768062507" className="w-12 h-12 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/30 flex items-center justify-center hover:bg-[#25D366] transition-all duration-300 text-white shadow-xl">
+                                <Phone size={20} />
                             </a>
                         </div>
                     </div>

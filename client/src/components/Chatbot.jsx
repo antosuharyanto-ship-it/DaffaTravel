@@ -50,30 +50,32 @@ const Chatbot = () => {
 
             {/* Chat Window */}
             {isOpen && (
-                <div className="absolute bottom-20 right-0 w-[90vw] md:w-[400px] h-[500px] bg-white rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden animate-slide-up">
+                <div className="absolute bottom-20 right-0 w-[90vw] md:w-[420px] h-[600px] bg-white/90 backdrop-blur-3xl rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-white/20 flex flex-col overflow-hidden animate-slide-up origin-bottom-right">
                     {/* Header */}
-                    <div className="p-4 bg-primary text-white flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                            <Bot size={24} />
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-sm">Daffa AI Assistant</h3>
-                            <div className="flex items-center text-[10px] text-white/80">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
-                                Online
+                    <div className="p-6 bg-slate-900 text-white flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                            <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center border border-white/10 shadow-inner">
+                                <Bot size={28} className="text-primary" />
+                            </div>
+                            <div>
+                                <h3 className="font-serif font-black text-base tracking-tight italic">Daffa AI <span className="text-secondary">Concierge</span></h3>
+                                <div className="flex items-center text-[10px] font-bold uppercase tracking-widest text-white/60">
+                                    <span className="w-2 h-2 rounded-full bg-secondary mr-2 animate-pulse shadow-[0_0_8px_#F59E0B]"></span>
+                                    Spiritually Guided
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Messages Area */}
-                    <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+                    <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-slate-50 to-white">
                         {messages.map((m, i) => (
                             <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                <div className={`flex max-w-[80%] space-x-2 ${m.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${m.role === 'user' ? 'bg-slate-200' : 'bg-primary/10'}`}>
-                                        {m.role === 'user' ? <User size={16} className="text-slate-600" /> : <Bot size={16} className="text-primary" />}
+                                <div className={`flex max-w-[85%] space-x-3 ${m.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${m.role === 'user' ? 'bg-slate-200' : 'bg-primary/10 border border-primary/20'}`}>
+                                        {m.role === 'user' ? <User size={18} className="text-slate-600" /> : <Bot size={18} className="text-primary" />}
                                     </div>
-                                    <div className={`p-3 rounded-2xl text-sm ${m.role === 'user' ? 'bg-slate-900 text-white rounded-tr-none' : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-tl-none'}`}>
+                                    <div className={`p-4 rounded-[1.5rem] text-sm leading-relaxed ${m.role === 'user' ? 'bg-slate-900 text-white rounded-tr-none shadow-xl' : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-tl-none'}`}>
                                         {m.content}
                                     </div>
                                 </div>
@@ -81,12 +83,14 @@ const Chatbot = () => {
                         ))}
                         {isLoading && (
                             <div className="flex justify-start">
-                                <div className="flex max-w-[80%] space-x-2">
-                                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                                        <Bot size={16} className="text-primary" />
+                                <div className="flex max-w-[80%] space-x-3">
+                                    <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                                        <Bot size={18} className="text-primary" />
                                     </div>
-                                    <div className="p-3 bg-white text-slate-400 rounded-2xl rounded-tl-none shadow-sm flex items-center">
-                                        <Loader2 size={16} className="animate-spin" />
+                                    <div className="p-4 bg-white text-slate-400 rounded-[1.5rem] rounded-tl-none shadow-sm flex items-center space-x-2">
+                                        <div className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce"></div>
+                                        <div className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                                        <div className="w-1.5 h-1.5 bg-primary/80 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                     </div>
                                 </div>
                             </div>
@@ -95,20 +99,22 @@ const Chatbot = () => {
                     </div>
 
                     {/* Input Area */}
-                    <form onSubmit={handleSend} className="p-4 bg-white border-t flex items-center space-x-2">
-                        <input
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder="Tulis pesan..."
-                            className="flex-1 p-2 bg-slate-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                        />
+                    <form onSubmit={handleSend} className="p-6 bg-white border-t border-slate-100 flex items-center space-x-3">
+                        <div className="flex-1 relative">
+                            <input
+                                type="text"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                placeholder="Type your inquiry..."
+                                className="w-full p-4 pr-12 bg-slate-50 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 border border-transparent focus:border-primary/20 transition-all font-medium placeholder:text-slate-400"
+                            />
+                        </div>
                         <button
                             type="submit"
                             disabled={!input.trim() || isLoading}
-                            className="p-2 bg-primary text-white rounded-xl hover:opacity-90 disabled:opacity-50 transition-all font-bold"
+                            className="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center hover:bg-slate-900 shadow-xl shadow-primary/20 hover:shadow-slate-900/20 disabled:opacity-50 transition-all transform active:scale-95"
                         >
-                            <Send size={18} />
+                            <Send size={20} />
                         </button>
                     </form>
                 </div>
