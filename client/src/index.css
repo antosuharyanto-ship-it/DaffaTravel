@@ -1,21 +1,26 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary: #0F766E;
+  --color-secondary: #F59E0B;
+  --color-accent: #14B8A6;
+  --color-background: #F8FAFC;
+
+  --font-sans: "Montserrat", sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+  --shadow-glass: 0 8px 32px 0 rgba(15, 118, 110, 0.1);
+}
 
 :root {
-  --primary: #0F766E;
-  --secondary: #F59E0B;
-  --accent: #14B8A6;
-  --background: #F8FAFC;
   --glass: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(255, 255, 255, 0.3);
 }
 
 @layer base {
   body {
-    @apply bg-[var(--background)] text-slate-900 font-sans antialiased;
+    @apply bg-background text-slate-900 font-sans antialiased;
   }
 
   h1,
@@ -51,6 +56,66 @@
   }
 }
 
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -61,7 +126,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--color-primary);
   border-radius: 4px;
 }
 
