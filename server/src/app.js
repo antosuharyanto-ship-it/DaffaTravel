@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth.routes');
 const packageRoutes = require('./routes/packages.routes');
 const branchRoutes = require('./routes/branches.routes');
 const transactionRoutes = require('./routes/transactions.routes');
+const chatbotRoutes = require('./routes/chatbot.routes');
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/branches', branchRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

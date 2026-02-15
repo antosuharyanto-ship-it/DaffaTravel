@@ -27,7 +27,7 @@ const getPackageById = async (req, res) => {
 // Create new package (Admin only)
 const createPackage = async (req, res) => {
     try {
-        const { title, description, price, type, duration, startDate, endDate, availableSlots, image } = req.body;
+        const { title, description, price, type, duration, startDate, endDate, availableSlots, image, flyerImage, hotelStars } = req.body;
 
         const newPackage = await prisma.package.create({
             data: {
@@ -39,7 +39,9 @@ const createPackage = async (req, res) => {
                 startDate: new Date(startDate),
                 endDate: new Date(endDate),
                 availableSlots: parseInt(availableSlots),
-                image
+                image,
+                flyerImage,
+                hotelStars: hotelStars ? parseInt(hotelStars) : 3
             }
         });
 

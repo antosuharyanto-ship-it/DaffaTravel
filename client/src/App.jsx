@@ -6,6 +6,8 @@ import PackagesPage from './pages/PackagesPage';
 import PackageDetailsPage from './pages/PackageDetailsPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
+import NotFoundPage from './pages/NotFoundPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminRoute from './components/AdminRoute';
 import './App.css';

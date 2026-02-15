@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
-import { LayoutGrid, Package as PackageIcon, Users, Plus, Trash2, Edit2, AlertCircle, X, Check } from 'lucide-react';
+import { LayoutGrid, Package as PackageIcon, Users, Image as ImageIcon, Plus, Trash2, Edit2, AlertCircle, X, Check } from 'lucide-react';
 
 const AdminDashboard = () => {
     const [stats, setStats] = useState({ packages: 0, bookings: 0, users: 0 });
@@ -8,6 +8,7 @@ const AdminDashboard = () => {
     const [packages, setPackages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddForm, setShowAddForm] = useState(false);
+    const [editingId, setEditingId] = useState(null);
     const [newPackage, setNewPackage] = useState({
         title: '',
         description: '',
@@ -17,7 +18,9 @@ const AdminDashboard = () => {
         availableSlots: 20,
         startDate: '',
         endDate: '',
-        image: ''
+        image: '',
+        flyerImage: '',
+        hotelStars: 3
     });
 
     useEffect(() => {
@@ -64,14 +67,33 @@ const AdminDashboard = () => {
                 startDate: new Date(newPackage.startDate),
                 endDate: new Date(newPackage.endDate)
             };
-            const res = await api.post('/packages', payload);
-            setPackages([...packages, res.data]);
-            setStats(prev => ({ ...prev, packages: prev.packages + 1 }));
+
+            if (editingId) {
+                const res = await api.put(`/packages/${editingId}`, payload);
+                setPackages(packages.map(p => p.id === editingId ? res.data : p));
+                setEditingId(null);
+            } else {
+                const res = await api.post('/packages', payload);
+                setPackages([...packages, res.data]);
+                setStats(prev => ({ ...prev, packages: prev.packages + 1 }));
+            }
+
             setShowAddForm(false);
-            setNewPackage({ title: '', description: '', price: '', duration: '', category: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '' });
+            setNewPackage({ title: '', description: '', price: '', duration: '', category: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
         } catch (error) {
-            alert('Failed to add package: ' + (error.response?.data?.error || error.message));
+            alert('Operation failed: ' + (error.response?.data?.error || error.message));
         }
+    };
+
+    const handleEdit = (pkg) => {
+        setNewPackage({
+            ...pkg,
+            startDate: pkg.startDate ? new Date(pkg.startDate).toISOString().split('T')[0] : '',
+            endDate: pkg.endDate ? new Date(pkg.endDate).toISOString().split('T')[0] : '',
+            price: pkg.price.toString()
+        });
+        setEditingId(pkg.id);
+        setShowAddForm(true);
     };
 
     return (
@@ -102,6 +124,13 @@ const AdminDashboard = () => {
                             <Users size={20} />
                             <span className="font-semibold">Bookings</span>
                         </button>
+                        <button
+                            onClick={() => setActiveTab('media')}
+                            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${activeTab === 'media' ? 'bg-primary text-white shadow-lg shadow-primary/30' : 'text-slate-600 hover:bg-white'}`}
+                        >
+                            <ImageIcon size={20} />
+                            <span className="font-semibold">Media</span>
+                        </button>
                     </aside>
 
                     {/* Content Area */}
@@ -111,15 +140,15 @@ const AdminDashboard = () => {
                                 <h1 className="text-3xl font-serif">System Overview</h1>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                     <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                                        <div className="text-slate-400 text-sm uppercase tracking-wider mb-1">Total Packages</div>
-                                        <div className="text-3xl font-bold text-primary">{stats.packages}</div>
+                                        <div className="text-slate-400 text-sm uppercase tracking-wider mb-1">Total Sales</div>
+                                        <div className="text-3xl font-bold text-primary">Rp {new Intl.NumberFormat('id-ID').format(stats.totalSales || 0)}</div>
                                     </div>
                                     <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                                        <div className="text-slate-400 text-sm uppercase tracking-wider mb-1">Active Bookings</div>
-                                        <div className="text-3xl font-bold text-secondary">{stats.bookings}</div>
+                                        <div className="text-slate-400 text-sm uppercase tracking-wider mb-1">Registered Agents</div>
+                                        <div className="text-3xl font-bold text-secondary">{stats.agents || 0}</div>
                                     </div>
                                     <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100">
-                                        <div className="text-slate-400 text-sm uppercase tracking-wider mb-1">Registered Users</div>
+                                        <div className="text-slate-400 text-sm uppercase tracking-wider mb-1">Total Accounts</div>
                                         <div className="text-3xl font-bold text-accent">{stats.users}</div>
                                     </div>
                                 </div>
@@ -138,7 +167,13 @@ const AdminDashboard = () => {
                                 <div className="flex justify-between items-center">
                                     <h1 className="text-3xl font-serif">Manage Packages</h1>
                                     <button
-                                        onClick={() => setShowAddForm(!showAddForm)}
+                                        onClick={() => {
+                                            if (showAddForm) {
+                                                setEditingId(null);
+                                                setNewPackage({ title: '', description: '', price: '', duration: '', category: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
+                                            }
+                                            setShowAddForm(!showAddForm);
+                                        }}
                                         className="btn-primary !py-2 !px-4 flex items-center space-x-2 text-sm"
                                     >
                                         {showAddForm ? <X size={18} /> : <Plus size={18} />}
@@ -148,7 +183,7 @@ const AdminDashboard = () => {
 
                                 {showAddForm && (
                                     <div className="glass-card p-8 border-2 border-primary/20 bg-primary/5">
-                                        <h2 className="text-xl font-bold mb-6">Create New Package</h2>
+                                        <h2 className="text-xl font-bold mb-6">{editingId ? 'Edit Package' : 'Create New Package'}</h2>
                                         <form onSubmit={handleAddPackage} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="md:col-span-2">
                                                 <label className="block text-sm font-semibold mb-2">Package Title</label>
@@ -167,12 +202,12 @@ const AdminDashboard = () => {
                                                 </select>
                                             </div>
                                             <div>
-                                                <label className="block text-sm font-semibold mb-2">Duration</label>
-                                                <input required type="text" placeholder="10 Days" className="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary outline-none" value={newPackage.duration} onChange={e => setNewPackage({ ...newPackage, duration: e.target.value })} />
+                                                <label className="block text-sm font-semibold mb-2">Hotel Stars</label>
+                                                <input required type="number" min="1" max="5" className="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary outline-none" value={newPackage.hotelStars} onChange={e => setNewPackage({ ...newPackage, hotelStars: parseInt(e.target.value) })} />
                                             </div>
-                                            <div>
-                                                <label className="block text-sm font-semibold mb-2">Slots</label>
-                                                <input required type="number" className="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary outline-none" value={newPackage.availableSlots} onChange={e => setNewPackage({ ...newPackage, availableSlots: e.target.value })} />
+                                            <div className="md:col-span-2">
+                                                <label className="block text-sm font-semibold mb-2">Flyer Image URL (Priority)</label>
+                                                <input type="text" placeholder="https://..." className="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary outline-none" value={newPackage.flyerImage} onChange={e => setNewPackage({ ...newPackage, flyerImage: e.target.value })} />
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-semibold mb-2">Start Date</label>
@@ -187,7 +222,9 @@ const AdminDashboard = () => {
                                                 <textarea required rows="3" placeholder="Package details..." className="w-full p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary outline-none" value={newPackage.description} onChange={e => setNewPackage({ ...newPackage, description: e.target.value })}></textarea>
                                             </div>
                                             <div className="md:col-span-2">
-                                                <button type="submit" className="btn-primary w-full shadow-emerald-500/20">Create Package</button>
+                                                <button type="submit" className="btn-primary w-full shadow-emerald-500/20">
+                                                    {editingId ? 'Update Package' : 'Create Package'}
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -217,7 +254,12 @@ const AdminDashboard = () => {
                                                     </td>
                                                     <td className="p-4 font-bold text-primary">${pkg.price}</td>
                                                     <td className="p-4 text-right space-x-2">
-                                                        <button className="p-2 text-slate-400 hover:text-primary transition-colors"><Edit2 size={16} /></button>
+                                                        <button
+                                                            onClick={() => handleEdit(pkg)}
+                                                            className="p-2 text-slate-400 hover:text-primary transition-colors"
+                                                        >
+                                                            <Edit2 size={16} />
+                                                        </button>
                                                         <button
                                                             onClick={() => handleDelete(pkg.id)}
                                                             className="p-2 text-slate-400 hover:text-red-500 transition-colors"
@@ -259,6 +301,29 @@ const AdminDashboard = () => {
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'media' && (
+                            <div className="space-y-8">
+                                <div className="flex justify-between items-center">
+                                    <h1 className="text-3xl font-serif">Media Assets</h1>
+                                    <button className="btn-primary flex items-center space-x-2">
+                                        <Plus size={20} />
+                                        <span>Upload File</span>
+                                    </button>
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                                    {[1, 2, 3, 4, 5].map(i => (
+                                        <div key={i} className="aspect-square bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer group">
+                                            <ImageIcon size={32} className="mb-2 group-hover:scale-110 transition-transform" />
+                                            <span className="text-[10px] font-bold uppercase tracking-widest">Asset {i}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-500 text-sm">
+                                    Tip: Official logos and spiritual hero assets are already integrated into the theme.
                                 </div>
                             </div>
                         )}
