@@ -16,9 +16,6 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create user
-        const filteredPackages = filter === 'ALL'
-            ? packages
-            : packages.filter(p => p.type === filter);
         const user = await prisma.user.create({
             data: {
                 name,
