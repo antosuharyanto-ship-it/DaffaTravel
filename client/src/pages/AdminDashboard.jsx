@@ -376,24 +376,50 @@ const AdminDashboard = () => {
                         )}
 
                         {activeTab === 'media' && (
-                            <div className="space-y-8">
-                                <div className="flex justify-between items-center">
-                                    <h1 className="text-3xl font-serif">Media Assets</h1>
-                                    <button className="btn-primary flex items-center space-x-2">
-                                        <Plus size={20} />
-                                        <span>Upload File</span>
+                            <div className="space-y-8 animate-fade-in">
+                                <div className={`flex justify-between items-center ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <div>
+                                        <h1 className="text-4xl font-serif font-black text-slate-900">Media Library</h1>
+                                        <p className="text-slate-400 text-xs font-medium tracking-wide mt-1">Manage and select visual assets for your travel packages.</p>
+                                    </div>
+                                    <button className="bg-slate-900 text-white !py-2.5 !px-6 rounded-2xl flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest hover:bg-secondary transition-all shadow-xl shadow-slate-900/10 active:scale-95">
+                                        <Plus size={16} className={language === 'ar' ? 'ml-2' : 'mr-2'} />
+                                        <span>Upload New</span>
                                     </button>
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                                    {[1, 2, 3, 4, 5].map(i => (
-                                        <div key={i} className="aspect-square bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer group">
-                                            <ImageIcon size={32} className="mb-2 group-hover:scale-110 transition-transform" />
-                                            <span className="text-[10px] font-bold uppercase tracking-widest">Asset {i}</span>
+
+                                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                                    {[
+                                        { url: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa', title: 'Sacred Kaaba' },
+                                        { url: 'https://images.unsplash.com/photo-1564769662533-4f00a87b4056', title: 'Grand Mosque' },
+                                        { url: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb', title: 'Medina Evening' },
+                                        { url: 'https://images.unsplash.com/photo-1529626455594-4ff0832cfb5e', title: 'Kuala Lumpur' },
+                                        { url: 'https://images.unsplash.com/photo-1508933254924-8960091ca97e', title: 'Bangkok City' },
+                                        { url: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e', title: 'Kyoto Temple' },
+                                        { url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23', title: 'Spiritual Hero' },
+                                        { url: 'https://images.unsplash.com/photo-1524230572899-a752b3835840', title: 'Hajj Pilgrimage' }
+                                    ].map((asset, i) => (
+                                        <div key={i} className="group relative aspect-square rounded-3xl overflow-hidden bg-slate-100 border border-slate-100 hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                                            <img src={`${asset.url}?auto=format&fit=crop&w=400&q=80`} alt={asset.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                                                <span className="text-white text-[10px] font-black uppercase tracking-widest leading-none">{asset.title}</span>
+                                                <div className="flex gap-2 mt-2">
+                                                    <button className="p-1.5 bg-white/20 hover:bg-white/40 rounded-lg text-white backdrop-blur-md transition-colors"><Edit2 size={12} /></button>
+                                                    <button className="p-1.5 bg-red-500/20 hover:bg-red-500/40 rounded-lg text-white backdrop-blur-md transition-colors"><Trash2 size={12} /></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 italic text-slate-500 text-sm">
-                                    Tip: Official logos and spiritual hero assets are already integrated into the theme.
+
+                                <div className="p-10 glass-card !bg-slate-900 text-white rounded-3xl relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 p-8 text-white/5 pointer-events-none">
+                                        <ImageIcon size={120} />
+                                    </div>
+                                    <h3 className="text-2xl font-serif font-black mb-2 italic">Premium Assets Library</h3>
+                                    <p className="text-slate-400 text-sm max-w-xl font-light">
+                                        These high-resolution sacred and exotic travel assets are curated to match the **Daffa Tour & Travel** brand identity. Use them as flyers or Hero backgrounds for new packages.
+                                    </p>
                                 </div>
                             </div>
                         )}
