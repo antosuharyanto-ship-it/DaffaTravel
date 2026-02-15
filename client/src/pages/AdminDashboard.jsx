@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import { useLanguage } from '../context/LanguageContext';
-import { LayoutGrid, Package as PackageIcon, Users, Image as ImageIcon, Plus, Trash2, Edit2, AlertCircle, X, Check, TrendingUp, HandCoins } from 'lucide-react';
+import { LayoutGrid, Package as PackageIcon, Users, Image as ImageIcon, Plus, Trash2, Edit2, AlertCircle, X, Check, TrendingUp, HandCoins, Sparkles } from 'lucide-react';
 
 const AdminDashboard = () => {
     const { t, language } = useLanguage();

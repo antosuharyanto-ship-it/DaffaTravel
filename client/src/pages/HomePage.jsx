@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../utils/api';
 import Hero from '../components/Hero';
 import CategorySection from '../components/CategorySection';

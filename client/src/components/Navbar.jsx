@@ -147,7 +147,7 @@ const Navbar = () => {
                             <>
                                 <Link to="/dashboard" className="flex items-center space-x-2 text-primary font-bold" onClick={() => setIsOpen(false)}>
                                     <User size={20} />
-                                    <span>{user.name}'s Dashboard</span>
+                                    <span>{user.name} - {t('nav.dashboard')}</span>
                                 </Link>
                                 {user.role === 'ADMIN' && (
                                     <Link to="/admin" className="flex items-center space-x-2 text-secondary font-bold" onClick={() => setIsOpen(false)}>
@@ -157,7 +157,7 @@ const Navbar = () => {
                                 )}
                                 <button onClick={() => { logout(); setIsOpen(false); }} className="flex items-center space-x-2 text-red-500 font-semibold uppercase tracking-wider text-sm">
                                     <LogOut size={20} />
-                                    <span>Logout Account</span>
+                                    <span>{t('nav.logout')}</span>
                                 </button>
                             </>
                         ) : (
@@ -167,14 +167,14 @@ const Navbar = () => {
                                     className="text-center py-3 font-bold text-slate-700 bg-slate-100 rounded-xl"
                                     onClick={() => setIsOpen(false)}
                                 >
-                                    Login
+                                    {t('nav.login')}
                                 </Link>
                                 <Link
                                     to="/register"
                                     className="text-center py-3 font-bold text-white bg-primary rounded-xl"
                                     onClick={() => setIsOpen(false)}
                                 >
-                                    Register
+                                    {t('nav.register')}
                                 </Link>
                             </div>
                         )}
