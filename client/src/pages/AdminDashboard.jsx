@@ -194,48 +194,102 @@ const AdminDashboard = () => {
                                 </div>
 
                                 {showAddForm && (
-                                    <div className="glass-card p-8 border-2 border-primary/20 bg-primary/5 animate-slide-up">
-                                        <h2 className="text-xl font-black font-serif mb-6">{editingId ? t('admin.form.edit') : t('admin.form.create')}</h2>
-                                        <form onSubmit={handleAddPackage} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                            <div className="md:col-span-2">
+                                    <div className="glass-card !bg-white p-10 border-slate-100 shadow-2xl animate-slide-up mb-12 relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary opacity-50"></div>
+                                        <div className={`flex items-center justify-between mb-8 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                            <div>
+                                                <h2 className="text-2xl font-black font-serif text-slate-900">{editingId ? t('admin.form.edit') : t('admin.form.create')}</h2>
+                                                <p className="text-slate-400 text-xs font-medium tracking-wide mt-1">Fill in the details to publish a new travel package.</p>
+                                            </div>
+                                            <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400">
+                                                {editingId ? <Edit2 size={24} /> : <Plus size={24} />}
+                                            </div>
+                                        </div>
+
+                                        <form onSubmit={handleAddPackage} className="grid grid-cols-1 md:grid-cols-6 gap-6">
+                                            {/* Basic Info Section */}
+                                            <div className="md:col-span-4">
                                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.form.title')}</label>
-                                                <input required type="text" placeholder="e.g. Premium Umrah February" className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.title} onChange={e => setNewPackage({ ...newPackage, title: e.target.value })} />
+                                                <input required type="text" placeholder="e.g. Premium Umrah February" className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all" value={newPackage.title} onChange={e => setNewPackage({ ...newPackage, title: e.target.value })} />
                                             </div>
-                                            <div>
-                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.table.price')} ($)</label>
-                                                <input required type="number" placeholder="2500" className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.price} onChange={e => setNewPackage({ ...newPackage, price: e.target.value })} />
-                                            </div>
-                                            <div>
+                                            <div className="md:col-span-2">
                                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.table.category')}</label>
-                                                <select className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium appearance-none" value={newPackage.category} onChange={e => setNewPackage({ ...newPackage, category: e.target.value })}>
-                                                    <option value="UMRAH">Umrah</option>
-                                                    <option value="HAJJ">Hajj</option>
-                                                    <option value="HOLIDAY">Holiday</option>
-                                                </select>
+                                                <div className="relative">
+                                                    <select className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium appearance-none transition-all" value={newPackage.category} onChange={e => setNewPackage({ ...newPackage, category: e.target.value })}>
+                                                        <option value="UMRAH">🕋 Umrah</option>
+                                                        <option value="HAJJ">🌙 Hajj</option>
+                                                        <option value="HOLIDAY">🌍 Holiday</option>
+                                                        <option value="OTHER">✨ Other</option>
+                                                    </select>
+                                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                                        <LayoutGrid size={16} />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.form.hotelStars')}</label>
-                                                <input required type="number" min="1" max="5" className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.hotelStars} onChange={e => setNewPackage({ ...newPackage, hotelStars: parseInt(e.target.value) })} />
+
+                                            {/* Details Section */}
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Price (Rp)</label>
+                                                <div className="relative">
+                                                    <input required type="number" placeholder="0" className={`w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-black text-xl transition-all ${language === 'ar' ? 'pr-12' : 'pl-12'}`} value={newPackage.price} onChange={e => setNewPackage({ ...newPackage, price: e.target.value })} />
+                                                    <span className={`absolute ${language === 'ar' ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs`}>Rp</span>
+                                                </div>
                                             </div>
                                             <div className="md:col-span-2">
-                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.form.flyerUrl')}</label>
-                                                <input type="text" placeholder="https://..." className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.flyerImage} onChange={e => setNewPackage({ ...newPackage, flyerImage: e.target.value })} />
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Duration (e.g. 9 Days)</label>
+                                                <input required type="text" placeholder="9 Days" className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all" value={newPackage.duration} onChange={e => setNewPackage({ ...newPackage, duration: e.target.value })} />
                                             </div>
-                                            <div>
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Hotel Stars</label>
+                                                <div className="flex gap-2">
+                                                    {[1, 2, 3, 4, 5].map(star => (
+                                                        <button key={star} type="button" onClick={() => setNewPackage({ ...newPackage, hotelStars: star })} className={`flex-1 py-3 rounded-xl border transition-all font-black text-sm ${newPackage.hotelStars === star ? 'bg-secondary border-secondary text-white shadow-lg shadow-secondary/20' : 'bg-white border-slate-100 text-slate-400 hover:border-secondary/30'}`}>
+                                                            {star}★
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Dates Section */}
+                                            <div className="md:col-span-3">
                                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.form.startDate')}</label>
-                                                <input required type="date" className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.startDate} onChange={e => setNewPackage({ ...newPackage, startDate: e.target.value })} />
+                                                <input required type="date" className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all" value={newPackage.startDate} onChange={e => setNewPackage({ ...newPackage, startDate: e.target.value })} />
                                             </div>
-                                            <div>
+                                            <div className="md:col-span-3">
                                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.form.endDate')}</label>
-                                                <input required type="date" className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.endDate} onChange={e => setNewPackage({ ...newPackage, endDate: e.target.value })} />
+                                                <input required type="date" className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all" value={newPackage.endDate} onChange={e => setNewPackage({ ...newPackage, endDate: e.target.value })} />
                                             </div>
-                                            <div className="md:col-span-2">
+
+                                            {/* Images Section */}
+                                            <div className="md:col-span-3">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Main Image ID/URL</label>
+                                                <div className="relative">
+                                                    <input type="text" placeholder="https://images.unsplash.com/..." className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all" value={newPackage.image} onChange={e => setNewPackage({ ...newPackage, image: e.target.value })} />
+                                                    <ImageIcon size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                </div>
+                                            </div>
+                                            <div className="md:col-span-3">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Flyer Image URL (Promotion)</label>
+                                                <div className="relative">
+                                                    <input type="text" placeholder="https://..." className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all" value={newPackage.flyerImage} onChange={e => setNewPackage({ ...newPackage, flyerImage: e.target.value })} />
+                                                    <Sparkles size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                </div>
+                                            </div>
+
+                                            {/* Description Section */}
+                                            <div className="md:col-span-6">
                                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('packages.description')}</label>
-                                                <textarea required rows="3" placeholder="Package details..." className="w-full p-4 rounded-2xl border border-slate-100 focus:ring-2 focus:ring-primary outline-none bg-white font-medium" value={newPackage.description} onChange={e => setNewPackage({ ...newPackage, description: e.target.value })}></textarea>
+                                                <textarea required rows="4" placeholder="Describe the journey, facilities, and inclusions..." className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium transition-all resize-none" value={newPackage.description} onChange={e => setNewPackage({ ...newPackage, description: e.target.value })}></textarea>
                                             </div>
-                                            <div className="md:col-span-2">
-                                                <button type="submit" className="bg-secondary hover:bg-amber-600 text-white w-full py-5 rounded-2xl font-black uppercase tracking-[0.2em] shadow-2xl shadow-secondary/20 transition-all active:scale-[0.98]">
-                                                    {editingId ? t('admin.form.update') : t('admin.form.createBtn')}
+
+                                            {/* Actions */}
+                                            <div className="md:col-span-6 flex items-center gap-4 mt-4">
+                                                <button type="submit" className="flex-1 bg-slate-900 hover:bg-slate-800 text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] shadow-2xl shadow-slate-900/10 transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                                                    {editingId ? <Check size={20} /> : <Plus size={20} />}
+                                                    <span>{editingId ? t('admin.form.update') : t('admin.form.createBtn')}</span>
+                                                </button>
+                                                <button type="button" onClick={() => setShowAddForm(false)} className="px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-all">
+                                                    {t('admin.form.cancel')}
                                                 </button>
                                             </div>
                                         </form>

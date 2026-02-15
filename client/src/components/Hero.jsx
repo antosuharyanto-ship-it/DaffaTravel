@@ -34,36 +34,34 @@ const Hero = () => {
                         </p>
                     </div>
                     {/* Search Bar / CTA Area */}
-                    <div className="glass-card p-3 mt-12 max-w-3xl flex flex-col md:flex-row gap-4 items-center">
-                        <div className="flex flex-wrap gap-4 pt-4 animate-fade-in delay-500">
-                            <button className="btn-secondary group">
-                                <span>{t('hero.cta')}</span>
-                                <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+                    <div className="mt-12 flex flex-col md:flex-row gap-8 items-start md:items-center">
+                        <button className="bg-secondary hover:bg-amber-600 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-secondary/30 active:scale-95 flex items-center group">
+                            <span>{t('hero.cta')}</span>
+                            <ArrowRight size={18} className={`ml-2 group-hover:translate-x-2 transition-transform ${language === 'ar' ? 'rotate-180' : ''}`} />
+                        </button>
+                    </div>
+
+                    {/* Search Box - Premium Style (Now in flow to prevent overlap) */}
+                    <div className="mt-16 w-full animate-slide-up delay-700">
+                        <div className="glass-card !bg-white/10 backdrop-blur-2xl border-white/20 p-2 md:p-3 rounded-3xl flex flex-col lg:flex-row items-stretch gap-2 transition-all hover:border-white/40">
+                            <div className={`flex-1 flex items-center px-6 py-4 lg:py-0 border-b lg:border-b-0 ${language === 'ar' ? 'lg:border-l' : 'lg:border-r'} border-white/10 group cursor-pointer hover:bg-white/5 transition-colors rounded-2xl lg:rounded-none`}>
+                                <MapPin className="text-secondary mr-4" />
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{t('hero.searchPlaceholder')}</span>
+                                    <span className="text-white font-serif font-bold text-lg">Makkah, Madinah</span>
+                                </div>
+                            </div>
+                            <div className={`flex-1 flex items-center px-6 py-4 lg:py-0 border-b lg:border-b-0 ${language === 'ar' ? 'lg:border-l' : 'lg:border-r'} border-white/10 group cursor-pointer hover:bg-white/5 transition-colors rounded-2xl lg:rounded-none`}>
+                                <Compass className="text-secondary mr-4" />
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{t('hero.categoryPlaceholder')}</span>
+                                    <span className="text-white font-serif font-bold text-lg">{t('categories.umrah.title')}</span>
+                                </div>
+                            </div>
+                            <button className="bg-white text-slate-900 hover:bg-secondary hover:text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95">
+                                {t('hero.searchButton')}
                             </button>
                         </div>
-                    </div>
-                </div>
-
-                {/* Search Box - Premium Floating Style */}
-                <div className="absolute bottom-12 left-4 right-4 md:left-auto md:right-12 md:max-w-3xl w-full animate-slide-up delay-700">
-                    <div className="glass-card !bg-white/10 backdrop-blur-2xl border-white/20 p-2 md:p-3 rounded-3xl flex flex-col md:flex-row items-stretch gap-2">
-                        <div className="flex-1 flex items-center px-6 py-4 md:py-0 border-b md:border-b-0 md:border-r border-white/10 group cursor-pointer">
-                            <MapPin className="text-secondary mr-4" />
-                            <div className="flex flex-col">
-                                <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{t('hero.searchPlaceholder')}</span>
-                                <span className="text-white font-serif font-bold text-lg">Makkah, Madinah</span>
-                            </div>
-                        </div>
-                        <div className="flex-1 flex items-center px-6 py-4 md:py-0 border-b md:border-b-0 md:border-r border-white/10 group cursor-pointer">
-                            <Compass className="text-secondary mr-4" />
-                            <div className="flex flex-col">
-                                <span className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{t('hero.categoryPlaceholder')}</span>
-                                <span className="text-white font-serif font-bold text-lg">{t('categories.umrah.title')}</span>
-                            </div>
-                        </div>
-                        <button className="bg-secondary hover:bg-amber-600 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-secondary/30 active:scale-95">
-                            {t('hero.searchButton')}
-                        </button>
                     </div>
                 </div>
             </div>
