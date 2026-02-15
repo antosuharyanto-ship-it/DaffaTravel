@@ -81,7 +81,7 @@ const AdminDashboard = () => {
             }
 
             setShowAddForm(false);
-            setNewPackage({ title: '', description: '', price: '', duration: '', category: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
+            setNewPackage({ title: '', description: '', price: '', duration: '', type: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
         } catch (error) {
             alert('Operation failed: ' + (error.response?.data?.error || error.message));
         }
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
                                         onClick={() => {
                                             if (showAddForm) {
                                                 setEditingId(null);
-                                                setNewPackage({ title: '', description: '', price: '', duration: '', category: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
+                                                setNewPackage({ title: '', description: '', price: '', duration: '', type: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
                                             }
                                             setShowAddForm(!showAddForm);
                                         }}
@@ -215,7 +215,7 @@ const AdminDashboard = () => {
                                             <div className="md:col-span-2">
                                                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">{t('admin.table.category')}</label>
                                                 <div className="relative">
-                                                    <select className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium appearance-none transition-all" value={newPackage.category} onChange={e => setNewPackage({ ...newPackage, category: e.target.value })}>
+                                                    <select className="w-full p-4 rounded-2xl border border-slate-100 focus:border-secondary focus:ring-4 focus:ring-secondary/5 outline-none bg-white font-medium appearance-none transition-all" value={newPackage.type} onChange={e => setNewPackage({ ...newPackage, type: e.target.value })}>
                                                         <option value="UMRAH">🕋 Umrah</option>
                                                         <option value="HAJJ">🌙 Hajj</option>
                                                         <option value="HOLIDAY">🌍 Holiday</option>
@@ -315,7 +315,7 @@ const AdminDashboard = () => {
                                                     </td>
                                                     <td className="p-6">
                                                         <span className="px-3 py-1 bg-slate-100 rounded-lg text-[9px] font-black tracking-widest uppercase text-slate-500">
-                                                            {pkg.category}
+                                                            {pkg.type}
                                                         </span>
                                                     </td>
                                                     <td className="p-6 font-black text-primary text-xl">

@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const prisma = require('../utils/prisma');
+const { generateToken } = require('../utils/jwt');
 
 const register = async (req, res) => {
     try {
@@ -15,6 +16,9 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create user
+        const filteredPackages = filter === 'ALL'
+            ? packages
+            : packages.filter(p => p.type === filter);
         const user = await prisma.user.create({
             data: {
                 name,

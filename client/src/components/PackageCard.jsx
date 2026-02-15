@@ -18,7 +18,7 @@ const PackageCard = ({ pkg }) => {
                 />
                 <div className={`absolute top-4 ${language === 'ar' ? 'right-4' : 'left-4'}`}>
                     <span className="px-3 py-1 bg-secondary text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg">
-                        {pkg.category}
+                        {pkg.type}
                     </span>
                 </div>
 

@@ -26,7 +26,7 @@ const PackagesPage = () => {
 
     const filteredPackages = filter === 'ALL'
         ? packages
-        : packages.filter(p => p.category === filter);
+        : packages.filter(p => p.type === filter);
 
     if (loading) {
         return (
