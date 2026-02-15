@@ -1,44 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 import umrahBg from '../assets/umrah_bg.jpg';
 import holidayBg from '../assets/holiday_bg.jpg';
 
-const categories = [
-    {
-        id: 'umrah',
-        title: 'Umrah Packages',
-        subtitle: 'باقات العمرة',
-        indonesian: 'Paket Umrah Premium',
-        description: 'Spiritual journeys to the holy cities with premium stay and guidance.',
-        icon: '🕋',
-        bg: umrahBg,
-        path: '/packages?category=UMRAH'
-    },
-    {
-        id: 'hajj',
-        title: 'Hajj Special',
-        subtitle: 'حج مخصص',
-        indonesian: 'Haji Khusus & Furoda',
-        description: 'Complete Hajj experience with dedicated support and elite facilities.',
-        icon: '🌙',
-        bg: umrahBg,
-        path: '/packages?category=HAJJ'
-    },
-    {
-        id: 'holiday',
-        title: 'Luxury Holidays',
-        subtitle: 'عطلات فاخرة',
-        indonesian: 'Wisata Halal Mancanegara',
-        description: 'Explore the world’s most beautiful destinations in style.',
-        icon: '✈️',
-        bg: holidayBg,
-        path: '/packages?category=HOLIDAY'
-    }
-];
-
 const CategorySection = () => {
+    const { t, language } = useLanguage();
+
+    const categories = [
+        { id: 'umrah', bg: umrahBg, icon: '🕋', path: '/packages?category=UMRAH' },
+        { id: 'hajj', bg: umrahBg, icon: '🌙', path: '/packages?category=HAJJ' },
+        { id: 'holiday', bg: holidayBg, icon: '✈️', path: '/packages?category=HOLIDAY' }
+    ];
+
     return (
-        <section className="container mx-auto px-4 py-20 -mt-24 relative z-20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section className={`container mx-auto px-4 py-20 relative z-20 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 ${language === 'ar' ? 'md:flex-row-reverse' : ''}`}>
                 {categories.map((cat) => (
                     <Link
                         key={cat.id}
@@ -58,18 +34,16 @@ const CategorySection = () => {
                                 {cat.icon}
                             </div>
                             <div className="space-y-1 mb-2">
-                                <span className="block text-xs font-bold text-secondary uppercase tracking-[0.2em]">{cat.subtitle}</span>
                                 <h3 className="text-2xl font-serif text-white font-black tracking-tight group-hover:text-secondary transition-colors duration-300">
-                                    {cat.title}
+                                    {t(`categories.${cat.id}.title`)}
                                 </h3>
-                                <span className="block text-[10px] text-white/60 font-medium italic">{cat.indonesian}</span>
                             </div>
                             <p className="text-slate-300 text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                                {cat.description}
+                                {t(`categories.${cat.id}.description`)}
                             </p>
-                            <div className="flex items-center text-white/80 group-hover:text-secondary font-bold tracking-widest uppercase text-[10px] transition-all duration-300">
-                                <span>Explore Catalog</span>
-                                <div className="ml-3 h-[1px] w-8 bg-white/30 group-hover:w-12 group-hover:bg-secondary transition-all duration-500"></div>
+                            <div className={`flex items-center text-white/80 group-hover:text-secondary font-bold tracking-widest uppercase text-[10px] transition-all duration-300 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                <span>{t('campaigns.cta')}</span>
+                                <div className={`h-[1px] w-8 bg-white/30 group-hover:w-12 group-hover:bg-secondary transition-all duration-500 ${language === 'ar' ? 'mr-3' : 'ml-3'}`}></div>
                             </div>
                         </div>
                     </Link>

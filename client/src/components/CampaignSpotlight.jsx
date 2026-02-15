@@ -1,75 +1,53 @@
-import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { Sparkles, Heart, Users, Star } from 'lucide-react';
 
-const campaigns = [
-    {
-        month: 'June 2025',
-        title: 'Hajj Reflections',
-        subtitle: 'تأملات الحج',
-        indonesian: 'Refleksi Ibadah Haji',
-        description: 'Post-Hajj spiritual planning and group reflection sessions for a more profound return journey.',
-        icon: <Sparkles className="w-6 h-6" />,
-        color: 'bg-emerald-500'
-    },
-    {
-        month: 'July 2025',
-        title: 'Sisters of Serenity',
-        subtitle: 'أخوات الصفاء',
-        indonesian: 'Jamaah Wanita Eksklusif',
-        description: 'Exclusive women-friendly Umrah services with female guides and private spiritual circles.',
-        icon: <Heart className="w-6 h-6" />,
-        color: 'bg-pink-500'
-    },
-    {
-        month: 'August 2025',
-        title: 'Ramadan 2026 Early Bird',
-        subtitle: 'الحجز المبكر لرمضان',
-        indonesian: 'Promo Early Bird Ramadan',
-        description: 'Secure your spiritual peak for next year with our Independence Day special offers.',
-        icon: <Star className="w-6 h-6" />,
-        color: 'bg-amber-500'
-    }
-];
-
 const CampaignSpotlight = () => {
+    const { t, language } = useLanguage();
+
+    const icons = [
+        <Sparkles className="w-6 h-6" />,
+        <Heart className="w-6 h-6" />,
+        <Star className="w-6 h-6" />
+    ];
+
+    const campaignItems = t('campaigns.items');
+
     return (
-        <section className="bg-white py-24">
+        <section className={`bg-white py-24 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
             <div className="container mx-auto px-4">
                 <div className="mb-16">
-                    <h2 className="text-secondary font-black tracking-[0.2em] uppercase text-[10px] md:text-sm mb-2 flex items-center gap-3">
-                        <span>Our 2025 Strategy</span>
+                    <h2 className={`text-secondary font-black tracking-[0.2em] uppercase text-[10px] md:text-sm mb-2 flex items-center gap-3 ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                        <span>{t('campaigns.tag')}</span>
                         <span className="w-6 h-[1px] bg-secondary/30"></span>
-                        <span className="text-secondary/60">Strategi 2025</span>
                     </h2>
                     <div className="space-y-2">
-                        <span className="block text-2xl font-serif text-slate-400 font-arabic italic" dir="rtl">أضواء روحية موسمية</span>
-                        <h3 className="text-4xl md:text-5xl font-serif text-slate-900 mb-6">Seasonal <span className="italic">Spiritual</span> Spotlights</h3>
+                        <h3 className="text-4xl md:text-5xl font-serif text-slate-900 mb-6 underline decoration-secondary/30 underline-offset-8">
+                            {t('campaigns.title')} <span className="italic">{t('campaigns.titleAccent')}</span> {t('campaigns.titleSuffix')}
+                        </h3>
                     </div>
                     <p className="text-slate-500 max-w-2xl leading-relaxed font-light">
-                        Each month, we focus on a unique aspect of the spiritual journey to ensure a deeper connection and a more holistic experience.
+                        {t('campaigns.description')}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    {campaigns.map((camp, idx) => (
+                    {campaignItems.map((camp, idx) => (
                         <div key={idx} className="group relative">
                             <div className="absolute -inset-2 bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                             <div className="relative glass-card !bg-white border-white/40 p-10 h-full flex flex-col hover:translate-y-[-12px] transition-all duration-500 shadow-sm hover:shadow-2xl">
-                                <div className={`w-16 h-16 ${camp.color} text-white rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl shadow-inner transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                                    {camp.icon}
+                                <div className={`w-16 h-16 ${idx === 0 ? 'bg-emerald-500' : idx === 1 ? 'bg-pink-500' : 'bg-amber-500'} text-white rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl shadow-inner transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                                    {icons[idx]}
                                 </div>
                                 <div className="space-y-1 mb-4">
                                     <div className="text-[10px] font-black text-secondary uppercase tracking-[0.3em]">{camp.month}</div>
-                                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-arabic" dir="rtl">{camp.subtitle}</div>
                                 </div>
                                 <h4 className="text-2xl font-serif font-black mb-1 text-slate-900 group-hover:text-primary transition-colors">{camp.title}</h4>
-                                <div className="text-[10px] text-slate-400 font-bold mb-4 uppercase tracking-widest">{camp.indonesian}</div>
                                 <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-1 font-light italic opacity-80 group-hover:opacity-100">
-                                    "{camp.description}"
+                                    "{camp.desc}"
                                 </p>
-                                <button className="group/link w-fit flex items-center text-primary font-bold text-xs uppercase tracking-widest relative">
-                                    <span>Explore Intent</span>
-                                    <div className="ml-3 h-[1px] w-6 bg-primary/30 group-hover/link:w-10 group-hover/link:bg-primary transition-all duration-500"></div>
+                                <button className={`group/link w-fit flex items-center text-primary font-bold text-xs uppercase tracking-widest relative ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <span>{t('campaigns.cta')}</span>
+                                    <div className={`h-[1px] w-6 bg-primary/30 group-hover/link:w-10 group-hover/link:bg-primary transition-all duration-500 ${language === 'ar' ? 'mr-3' : 'ml-3'}`}></div>
                                 </button>
                             </div>
                         </div>

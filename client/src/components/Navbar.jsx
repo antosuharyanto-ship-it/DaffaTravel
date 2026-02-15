@@ -3,9 +3,12 @@ import { useAuth } from '../context/AuthContext';
 import { Menu, X, User, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import logo from '../assets/logo.jpg';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
+    const { t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
@@ -25,10 +28,10 @@ const Navbar = () => {
             }`}>
             <div className="container mx-auto px-4 md:px-6">
                 <div className="flex justify-between items-center">
-                    <Link to="/" className="flex items-center space-x-4 group">
+                    <Link to="/" className="flex items-center space-x-3 md:space-x-4 group min-w-0 flex-shrink-0">
                         <div
-                            className="h-12 w-12 md:h-16 md:w-16 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-105 transition-all duration-500 bg-white p-1.5 ring-1 ring-slate-100 flex-shrink-0"
-                            style={{ minWidth: '48px', minHeight: '48px' }}
+                            className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl overflow-hidden shadow-2xl group-hover:scale-105 transition-all duration-500 bg-white p-1 md:p-1.5 ring-1 ring-slate-100 flex-shrink-0"
+                            style={{ minWidth: '40px', minHeight: '40px' }}
                         >
                             <img
                                 src={logo}
@@ -37,31 +40,34 @@ const Navbar = () => {
                                 style={{ maxHeight: '100%', maxWidth: '100%' }}
                             />
                         </div>
-                        <div className="flex flex-col">
-                            <span className={`text-xl md:text-3xl font-serif font-black tracking-[-0.04em] leading-none ${scrolled || !isHome ? 'text-slate-900' : 'text-white'
+                        <div className="flex flex-col min-w-0">
+                            <span className={`text-lg md:text-2xl font-serif font-black tracking-[-0.04em] leading-none truncate ${scrolled || !isHome ? 'text-slate-900' : 'text-white'
                                 }`}>
                                 DAFFA <span className="text-secondary italic">TRAVEL</span>
                             </span>
-                            <span className={`text-[9px] md:text-[11px] uppercase tracking-[0.3em] font-extrabold ${scrolled || !isHome ? 'text-slate-500' : 'text-slate-300'}`}>
-                                Biro Perjalanan Umroh & Haji
+                            <span className={`text-[8px] md:text-[10px] uppercase tracking-[0.2em] font-extrabold truncate ${scrolled || !isHome ? 'text-slate-500' : 'text-slate-300'}`}>
+                                {t('footer.company')}
                             </span>
                         </div>
                     </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center space-x-10">
-                        {['Home', 'Packages', 'About', 'Contact'].map((item) => (
+                    <div className="hidden lg:flex items-center space-x-8 xl:space-x-10">
+                        {['home', 'packages', 'about', 'contact'].map((key) => (
                             <Link
-                                key={item}
-                                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                                className={`text-[13px] font-bold tracking-[0.1em] uppercase hover:text-secondary transition-all duration-300 relative group/link ${scrolled || !isHome ? 'text-slate-800' : 'text-white'
+                                key={key}
+                                to={key === 'home' ? '/' : `/${key}`}
+                                className={`text-[12px] font-bold tracking-[0.1em] uppercase hover:text-secondary transition-all duration-300 relative group/link ${scrolled || !isHome ? 'text-slate-800' : 'text-white'
                                     }`}
                             >
-                                {item}
+                                {t(`nav.${key}`)}
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover/link:w-full"></span>
                             </Link>
                         ))}
                         <div className="h-6 w-px bg-slate-300/30 mx-2"></div>
+
+                        <LanguageSwitcher />
+
                         {user ? (
                             <div className="flex items-center space-x-4">
                                 <Link
@@ -75,38 +81,41 @@ const Navbar = () => {
                                 <button
                                     onClick={logout}
                                     className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                                    title="Logout"
+                                    title={t('nav.logout')}
                                 >
                                     <LogOut size={20} />
                                 </button>
                             </div>
                         ) : (
-                            <div className="flex items-center space-x-6">
+                            <div className="flex items-center space-x-4 xl:space-x-6">
                                 <Link
                                     to="/login"
-                                    className={`text-[13px] font-bold tracking-[0.1em] uppercase hover:text-secondary transition-colors ${scrolled || !isHome ? 'text-slate-800' : 'text-white'
+                                    className={`text-[12px] font-bold tracking-[0.1em] uppercase hover:text-secondary transition-colors ${scrolled || !isHome ? 'text-slate-800' : 'text-white'
                                         }`}
                                 >
-                                    Login
+                                    {t('nav.login')}
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className="bg-secondary hover:bg-amber-600 text-white px-8 py-3 rounded-full text-[13px] font-bold uppercase tracking-[0.1em] shadow-xl shadow-secondary/20 hover:shadow-secondary/40 transform hover:-translate-y-0.5 transition-all duration-300"
+                                    className="bg-secondary hover:bg-amber-600 text-white px-6 xl:px-8 py-2.5 xl:py-3 rounded-full text-[12px] font-bold uppercase tracking-[0.1em] shadow-xl shadow-secondary/20 hover:shadow-secondary/40 transform hover:-translate-y-0.5 transition-all duration-300"
                                 >
-                                    Register
+                                    {t('nav.register')}
                                 </Link>
                             </div>
                         )}
                     </div>
 
                     {/* Mobile Menu Button */}
-                    <button
-                        className={`md:hidden p-2 rounded-lg ${scrolled || !isHome ? 'text-slate-700 bg-slate-100' : 'text-white bg-white/20 backdrop-blur-sm'
-                            }`}
-                        onClick={() => setIsOpen(!isOpen)}
-                    >
-                        {isOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    <div className="flex lg:hidden items-center space-x-4">
+                        <LanguageSwitcher />
+                        <button
+                            className={`p-2 rounded-lg ${scrolled || !isHome ? 'text-slate-700 bg-slate-100' : 'text-white bg-white/20 backdrop-blur-sm'
+                                }`}
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile Menu */}
