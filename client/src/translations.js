@@ -85,7 +85,36 @@ export const translations = {
             soldOut: 'Sold Out',
             bookingNote: 'No credit card required. Our sales agent will verify your booking first.',
             confirmed: 'Booking Confirmed!',
-            confirmedNote: 'Our agent will contact you shortly to finalize details.'
+            confirmedNote: 'Our agent will contact you shortly to finalize details.',
+            modal: {
+                title: 'Confirm Booking',
+                methodTitle: 'Select Payment Method',
+                gatewayTitle: 'Payment Gateway',
+                gatewayDesc: 'Virtual Account, Credit Card, QRIS (Powered by Midtrans)',
+                transferTitle: 'Bank Transfer',
+                transferDesc: 'Manual Transfer to PT. Andity Kreasi Mandiri',
+                continue: 'Continue to Payment',
+                connecting: 'Connecting to Midtrans',
+                connectingDesc: 'We are preparing your secure payment page. Please wait...',
+                transferNote: 'Please transfer to one of the accounts below and attach proof of payment via WhatsApp or Admin Panel.',
+                copySuccess: 'Account number copied successfully!',
+                back: 'Back'
+            }
+        },
+        auth: {
+            loginTitle: 'Login',
+            registerTitle: 'Register',
+            name: 'Full Name',
+            email: 'Email Address',
+            password: 'Password',
+            loginBtn: 'Login',
+            registerBtn: 'Register',
+            error: 'Authentication failed'
+        },
+        chatbot: {
+            welcome: 'Hello! I am Daffa Tour\'s AI assistant. How can I help you with our Umrah, Hajj, or Holiday packages?',
+            placeholder: 'Type your inquiry...',
+            error: 'Sorry, I am experiencing technical difficulties. Please contact us via WhatsApp.'
         },
         admin: {
             title: 'Admin Dashboard',
@@ -212,7 +241,36 @@ export const translations = {
             soldOut: 'Habis Terjual',
             bookingNote: 'Tanpa kartu kredit. Agen kami akan memverifikasi pesanan Anda terlebih dahulu.',
             confirmed: 'Pemesanan Berhasil!',
-            confirmedNote: 'Agen kami akan segera menghubungi Anda untuk finalisasi detail.'
+            confirmedNote: 'Agen kami akan segera menghubungi Anda untuk finalisasi detail.',
+            modal: {
+                title: 'Konfirmasi Pemesanan',
+                methodTitle: 'Pilih Metode Pembayaran',
+                gatewayTitle: 'Payment Gateway',
+                gatewayDesc: 'Virtual Account, Credit Card, QRIS (Powered by Midtrans)',
+                transferTitle: 'Transfer Bank',
+                transferDesc: 'Manual Transfer ke Rekening PT. Andity Kreasi Mandiri',
+                continue: 'Lanjutkan Pembayaran',
+                connecting: 'Menghubungkan ke Midtrans',
+                connectingDesc: 'Kami sedang menyiapkan halaman pembayaran aman Anda. Mohon tunggu sebentar...',
+                transferNote: 'Silakan transfer ke salah satu rekening di bawah ini dan lampirkan bukti pembayaran melalui WhatsApp atau Admin Panel.',
+                copySuccess: 'Nomor rekening berhasil disalin!',
+                back: 'Kembali'
+            }
+        },
+        auth: {
+            loginTitle: 'Masuk',
+            registerTitle: 'Daftar',
+            name: 'Nama Lengkap',
+            email: 'Alamat Email',
+            password: 'Kata Sandi',
+            loginBtn: 'Masuk',
+            registerBtn: 'Daftar',
+            error: 'Autentikasi gagal'
+        },
+        chatbot: {
+            welcome: 'Halo! Saya asisten AI Daffa Tour. Ada yang bisa saya bantu terkait paket Umroh, Haji, atau Wisata kami?',
+            placeholder: 'Ketik pertanyaan Anda...',
+            error: 'Maaf, saya sedang mengalami kendala teknis. Silakan hubungi kami via WhatsApp.'
         },
         admin: {
             title: 'Panel Admin',
@@ -339,7 +397,36 @@ export const translations = {
             soldOut: 'نفدت الكمية',
             bookingNote: 'لا يلزم وجود بطاقة ائتمان. سيقوم وكيل المبيعات لدينا بالتحقق من حجزك أولاً.',
             confirmed: 'تم تأكيد الحجز!',
-            confirmedNote: 'سيتصل بك وكيلنا قريباً لإنهاء التفاصيل.'
+            confirmedNote: 'سيتصل بك وكيلنا قريباً لإنهاء التفاصيل.',
+            modal: {
+                title: 'تأكيد الحجز',
+                methodTitle: 'اختر طريقة الدفع',
+                gatewayTitle: 'بوابة الدفع',
+                gatewayDesc: 'الحساب الافتراضي، بطاقة الائتمان، QRIS (بواسطة Midtrans)',
+                transferTitle: 'تحويل بنكي',
+                transferDesc: 'تحويل يدوي إلى شركة أنديتي كرياسي مانديري',
+                continue: 'المتابعة إلى الدفع',
+                connecting: 'الاتصال بـ Midtrans',
+                connectingDesc: 'نحن نجهز صفحة الدفع الآمنة الخاصة بك. يرجى الانتظار...',
+                transferNote: 'يرجى التحويل إلى أحد الحسابات أدناه وإرفاق إثبات الدفع عبر WhatsApp أو لوحة التحكم.',
+                copySuccess: 'تم نسخ رقم الحساب بنجاح!',
+                back: 'رجوع'
+            }
+        },
+        auth: {
+            loginTitle: 'تسجيل الدخول',
+            registerTitle: 'إنشاء حساب',
+            name: 'الاسم الكامل',
+            email: 'البريد الإلكتروني',
+            password: 'كلمة المرور',
+            loginBtn: 'دخول',
+            registerBtn: 'تسجيل',
+            error: 'فشل المصادقة'
+        },
+        chatbot: {
+            welcome: 'مرحباً! أنا المساعد الذكي لـ Daffa Tour. كيف يمكنني مساعدتك بخصوص باقات العمرة أو الحج أو العطلات؟',
+            placeholder: 'اكتب استفسارك هنا...',
+            error: 'عذراً، أواجه بعض الصعوبات الفنية. يرجى مراسلتنا عبر WhatsApp.'
         },
         admin: {
             title: 'لوحة التحكم',

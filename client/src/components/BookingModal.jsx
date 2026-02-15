@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { X, CreditCard, Landmark, CheckCircle2, ChevronRight, Copy } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const BookingModal = ({ isOpen, onClose, pkg }) => {
+    const { t } = useLanguage();
     const [step, setStep] = useState(1); // 1: Method Selection, 2: Confirmation/Payment
     const [method, setMethod] = useState(null);
 
@@ -40,7 +42,7 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
-        alert('Nomor rekening berhasil disalin!');
+        alert(t('packages.modal.copySuccess'));
     };
 
     return (
@@ -49,7 +51,7 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                 {/* Header */}
                 <div className="p-6 border-b flex justify-between items-center bg-slate-50">
                     <div>
-                        <h2 className="text-xl font-bold text-slate-900">Konfirmasi Pemesanan</h2>
+                        <h2 className="text-xl font-bold text-slate-900">{t('packages.modal.title')}</h2>
                         <p className="text-sm text-slate-500">{pkg.title}</p>
                     </div>
                     <button onClick={onClose} className="p-2 hover:bg-white rounded-full transition-colors">
@@ -60,7 +62,7 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                 <div className="p-8">
                     {step === 1 ? (
                         <div className="space-y-6">
-                            <h3 className="text-lg font-bold">Pilih Metode Pembayaran</h3>
+                            <h3 className="text-lg font-bold">{t('packages.modal.methodTitle')}</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <button
                                     onClick={() => setMethod('MIDTRANS')}
@@ -69,8 +71,8 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                                     <div className="p-3 bg-primary/10 rounded-xl text-primary mb-4">
                                         <CreditCard size={24} />
                                     </div>
-                                    <span className="font-bold">Payment Gateway</span>
-                                    <span className="text-xs text-slate-500 mt-1">Virtual Account, Credit Card, QRIS (Powered by Midtrans)</span>
+                                    <span className="font-bold">{t('packages.modal.gatewayTitle')}</span>
+                                    <span className="text-xs text-slate-500 mt-1">{t('packages.modal.gatewayDesc')}</span>
                                 </button>
                                 <button
                                     onClick={() => setMethod('TRANSFER')}
@@ -79,8 +81,8 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                                     <div className="p-3 bg-secondary/10 rounded-xl text-secondary mb-4">
                                         <Landmark size={24} />
                                     </div>
-                                    <span className="font-bold">Transfer Bank</span>
-                                    <span className="text-xs text-slate-500 mt-1">Manual Transfer ke Rekening PT. Andity Kreasi Mandiri</span>
+                                    <span className="font-bold">{t('packages.modal.transferTitle')}</span>
+                                    <span className="text-xs text-slate-500 mt-1">{t('packages.modal.transferDesc')}</span>
                                 </button>
                             </div>
 
@@ -89,7 +91,7 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                                 onClick={() => setStep(2)}
                                 className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed mt-4 py-4 flex items-center justify-center space-x-2"
                             >
-                                <span>Lanjutkan Pembayaran</span>
+                                <span>{t('packages.modal.continue')}</span>
                                 <ChevronRight size={20} />
                             </button>
                         </div>
@@ -100,15 +102,15 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                                     <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary animate-pulse">
                                         <CreditCard size={40} />
                                     </div>
-                                    <h3 className="text-xl font-bold">Menghubungkan ke Midtrans</h3>
-                                    <p className="text-slate-500 max-w-xs mx-auto">Kami sedang menyiapkan halaman pembayaran aman Anda. Mohon tunggu sebentar...</p>
+                                    <h3 className="text-xl font-bold">{t('packages.modal.connecting')}</h3>
+                                    <p className="text-slate-500 max-w-xs mx-auto">{t('packages.modal.connectingDesc')}</p>
                                 </div>
                             ) : (
                                 <div className="space-y-6">
                                     <div className="p-4 bg-orange-50 border border-orange-100 rounded-xl flex items-start space-x-3">
                                         <CheckCircle2 size={20} className="text-orange-500 mt-0.5" />
                                         <p className="text-xs text-orange-800 leading-relaxed font-medium">
-                                            Silakan transfer ke salah satu rekening di bawah ini dan lampirkan bukti pembayaran melalui WhatsApp atau Admin Panel.
+                                            {t('packages.modal.transferNote')}
                                         </p>
                                     </div>
 
@@ -141,7 +143,7 @@ const BookingModal = ({ isOpen, onClose, pkg }) => {
                                         onClick={() => setStep(1)}
                                         className="w-full py-4 border-2 border-slate-200 rounded-2xl font-bold text-slate-600 hover:bg-slate-50 transition-colors"
                                     >
-                                        Kembali
+                                        {t('packages.modal.back')}
                                     </button>
                                 </div>
                             )}

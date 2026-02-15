@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const RegisterPage = () => {
+    const { t } = useLanguage();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -24,11 +26,11 @@ const RegisterPage = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="p-8 bg-white rounded shadow-md w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-6 text-center text-primary">Register</h2>
+                <h2 className="text-2xl font-bold mb-6 text-center text-primary">{t('auth.registerTitle')}</h2>
                 {error && <div className="p-2 mb-4 text-red-700 bg-red-100 rounded">{error}</div>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block mb-1 font-medium">Name</label>
+                        <label className="block mb-1 font-medium">{t('auth.name')}</label>
                         <input
                             type="text"
                             value={name}
@@ -38,7 +40,7 @@ const RegisterPage = () => {
                         />
                     </div>
                     <div>
-                        <label className="block mb-1 font-medium">Email</label>
+                        <label className="block mb-1 font-medium">{t('auth.email')}</label>
                         <input
                             type="email"
                             value={email}
@@ -48,7 +50,7 @@ const RegisterPage = () => {
                         />
                     </div>
                     <div>
-                        <label className="block mb-1 font-medium">Password</label>
+                        <label className="block mb-1 font-medium">{t('auth.password')}</label>
                         <input
                             type="password"
                             value={password}
@@ -58,7 +60,7 @@ const RegisterPage = () => {
                         />
                     </div>
                     <button type="submit" className="w-full py-2 text-white rounded bg-primary hover:bg-teal-800 transition">
-                        Register
+                        {t('auth.registerBtn')}
                     </button>
                 </form>
             </div>

@@ -5,9 +5,10 @@ import CategorySection from '../components/CategorySection';
 import WhyChooseUs from '../components/WhyChooseUs';
 import CampaignSpotlight from '../components/CampaignSpotlight';
 import PackageCard from '../components/PackageCard';
-import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const HomePage = () => {
+    const { t } = useLanguage();
     const [featuredPackages, setFeaturedPackages] = useState([]);
     const [loading, setLoading] = useState(true);
 

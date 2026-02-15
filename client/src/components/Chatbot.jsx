@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, X, Bot, User, Loader2 } from 'lucide-react';
 import api from '../utils/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const Chatbot = () => {
+    const { t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { role: 'assistant', content: 'Halo! Saya asisten AI Daffa Tour. Ada yang bisa saya bantu terkait paket Umroh, Haji, atau Wisata kami?' }
+        { role: 'assistant', content: t('chatbot.welcome') }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,7 @@ const Chatbot = () => {
             const response = await api.post('/chatbot', { message: input });
             setMessages(prev => [...prev, { role: 'assistant', content: response.data.reply }]);
         } catch (error) {
-            setMessages(prev => [...prev, { role: 'assistant', content: 'Maaf, saya sedang mengalami kendala teknis. Silakan hubungi kami via WhatsApp.' }]);
+            setMessages(prev => [...prev, { role: 'assistant', content: t('chatbot.error') }]);
         } finally {
             setIsLoading(false);
         }
@@ -105,7 +107,7 @@ const Chatbot = () => {
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                placeholder="Type your inquiry..."
+                                placeholder={t('chatbot.placeholder')}
                                 className="w-full p-4 pr-12 bg-slate-50 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 border border-transparent focus:border-primary/20 transition-all font-medium placeholder:text-slate-400"
                             />
                         </div>
