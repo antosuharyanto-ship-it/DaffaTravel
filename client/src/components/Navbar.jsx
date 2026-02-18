@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, User, LogOut, ShieldCheck } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import logo from '../assets/logo.jpg';
+import logo from '../assets/logo_premium.jpg';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import RunningBanner from './RunningBanner';
@@ -45,12 +45,7 @@ const Navbar = () => {
                                     style={{ maxHeight: '100%', maxWidth: '100%' }}
                                 />
                             </div>
-                            <div className="flex flex-col min-w-0">
-                                <span className={`text-lg md:text-2xl font-serif font-black tracking-[-0.04em] leading-none truncate ${scrolled || !isHome ? 'text-slate-900' : 'text-white'
-                                    }`}>
-                                    DAFFA <span className="text-secondary italic">TRAVEL</span>
-                                </span>
-                            </div>
+                            {/* Text removed to let the premium logo shine, as it contains its own text */}
                         </Link>
 
                         {/* Desktop Menu */}
