@@ -69,7 +69,7 @@ const AboutPage = () => {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                            {(t('about.legalItems') || [
+                            {(Array.isArray(t('about.legalItems')) ? t('about.legalItems') : [
                                 'Akta Pendirian No. 20.- Tanggal 22 Februari 2013',
                                 'Tanda Daftar Usaha Biro Perjalanan Wisata',
                                 'Izin PPIU No. 02780100619940003 Tahun 2023',

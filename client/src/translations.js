@@ -201,7 +201,21 @@ export const translations = {
         },
         about: {
             description: 'Daffa Tours is part of PT. Anditi Kreasi Mandiri, dedicated to providing Umrah and VIP Umrah services with various incentive tours to enhance the devotion of your journey. We visit historical Islamic cities across the Middle East, Europe, and America. Daffa Tour offers high-quality, affordable packages tailored to loyal customers, ensuring every trip provides benefits and guaranteed departures with the best Mutawwif and Tour Leaders. Daffa Tour aims to facilitate worship for all pilgrims seeking to perform their rites in the Holy Land with full devotion. Amidst growing travel competition, we remain committed to our 3G philosophy: Good Service, Good Quality & Good Price (3G).',
-            legalTitle: 'Legal & Business Licensing'
+            legalTitle: 'Legal & Business Licensing',
+            legalItems: [
+                'Deed of Incorporation No. 20.- Dated February 22, 2013 (Notary Junianto, SH. M.kn)',
+                'Amendment Deed No. -17- Dated September 10, 2014 (Notary Rose Takarina, S.H)',
+                'Amendment Deed No. -7- Dated January 10, 2015 (Notary Rose Takarina, S.H)',
+                'Deed of Declaration of Circular Resolution... No. -56- Dated September 25, 2020',
+                'Deed of Declaration of Circular Resolution... No. -5- Dated June 3, 2022',
+                'Business Registration Number (TDP) No. 09.05.1.46.85 108',
+                'Trading Business License (SIUP) No. 00008/24.1.0/31.71-01.1003/1.824.271/2015',
+                'Domicile Certificate No. 832/27.1.0/31.71.06.1004/-071.562/2016',
+                'Tax ID (NPWP) No. 71.519.960.0-029.000',
+                'Travel Bureau Registration 45/14.11.0/31.71.06.1004/-1.858.8/2017',
+                'Safety Regulation (UUG) 253/26.1.0/31.71.01/-1.751.21/2015',
+                'PPIU License No. 02780100619940003 Year 2023'
+            ]
         }
     },
     id: {
@@ -438,10 +452,34 @@ export const translations = {
             articles: 'مقالات',
             aboutTitle: 'مقدمة'
         },
-        contact: {
-            tagline: 'اتصل بنا',
-            title: 'اتصل',
-            titleAccent: 'بنا',
+        about: {
+            description: 'dafa tours is part of PT. Anditi Kreasi Mandiri, dedicated to providing Umrah and VIP Umrah services with various incentive tours to enhance the devotion of your journey. We visit historical Islamic cities across the Middle East, Europe, and America. Daffa Tour offers high-quality, affordable packages tailored to loyal customers, ensuring every trip provides benefits and guaranteed departures with the best Mutawwif and Tour Leaders. Daffa Tour aims to facilitate worship for all pilgrims seeking to perform their rites in the Holy Land with full devotion. Amidst growing travel competition, we remain committed to our 3G philosophy: Good Service, Good Quality & Good Price (3G).',
+            legalTitle: 'Commercial & Legal Licensing',
+            legalItems: [
+                'Deed of Establishment No. 20.- Dated February 22, 2013 (Notary Junianto, SH. M.kn)',
+                'Amendment Deed No. -17- Dated September 10, 2014 (Notary Rose Takarina, S.H)',
+                'Amendment Deed No. -7- Dated January 10, 2015 (Notary Rose Takarina, S.H)',
+                'Deed of Statement of Circular Balance No. -56- Dated September 25, 2020 (Notary Rose Takarina, S.H)',
+                'Deed of Statement of Circular Balance No. -5- Dated June 3, 2022 (Notary Rose Takarina, S.H)',
+                'Trade Register Number (TDP) No. 09.05.1.46.85 108',
+                'Trading Business License (SIUP) No. 00008/24.1.0/31.71-01.1003/1.824.271/2015',
+                'Domicile Certificate No. 832/27.1.0/31.71.06.1004/-071.562/2016',
+                'Tax ID Number (NPWP) No. 71.519.960.0-029.000',
+                'Travel Bureau Registration 45/14.11.0/31.71.06.1004/-1.858.8/2017',
+                'Nuisance Ordinance 253/26.1.0/31.71.01/-1.751.21/2015',
+                'PPIU License No. 02780100619940003 Year 2023'
+            ]
+        },
+        offices: {
+            title: 'Our Global Network',
+            list: [
+                { name: 'Main Office', location: 'Sudirman Park', address: 'Tower B unit B 31 CJ, Jl. KH. Mas Mansyur Kav. 35 Karet Tengsin, Tanah Abang – Jakarta Pusat 10250', phone: '0877-6806-2507' },
+                { name: 'Branch Office', location: 'Puri Kembangan', address: 'Jl. Kembang kerep No.07 Rw.2, Kembangan Selatan, Kec. Kembangan, Kota Jakarta Barat' },
+                { name: 'Agent Network', location: 'East Kalimantan (Balikpapan)', address: 'MT. Haryono Jl. Almakmur 02 RT.31 No.14.B Kel. Damai Balikpapan City', contact: '0811-539-494 (Ibu Nana)' },
+                { name: 'Agent Network', location: 'South Kalimantan (Banjarmasin)', address: 'Jl. Sutoyo S. Komplek Wildan Sari 1 G No.46 Kel. Telaga Biru Banjarmasin, South Kalimantan', contact: '0852-4999-6090 (Susi), 0852-5195-1110 (Ami), 0896-8051-3764 (Ilham)' },
+                { name: 'Agent Network', location: 'Riau', address: 'Jl. Tengku Zainal Abidin, Kota Tinggi Kec., Pekanbaru Riau 28155', contact: '0821-3221-6515 (Ibu Rika)' },
+                { name: 'Agent Network', location: 'Bogor', address: 'Kp. Sampiran RT 01/04 Desa Pangaur, Kec. Jasinga, Kab. Bogor', contact: '0858-9435-7559 (Bpk Musdario)' }
+            ]
         },
         hero: {
             subtitle: 'Sahabat Perjalanan Anda',

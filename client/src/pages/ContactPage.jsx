@@ -43,7 +43,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {(t('offices.list') || []).map((office, i) => (
+                    {(Array.isArray(t('offices.list')) ? t('offices.list') : []).map((office, i) => (
                         <div
                             key={i}
                             className="glass-card !bg-white p-10 border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col"
