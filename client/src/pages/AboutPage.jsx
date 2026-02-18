@@ -28,7 +28,7 @@ const AboutPage = () => {
                             </h1>
                         </div>
                         <p className="text-slate-600 text-lg leading-relaxed font-light max-w-2xl">
-                            {t('about.description') || 'Daffa Tours adalah bagian dari PT. Anditi Kreasi Mandiri yang beroperasi untuk memberikan pelayanan ibadah Umroh / Umroh VIP dengan berbagai macam tour insentif yang dapat memperkuat kekhusuan ibadah perjalanan Anda, dengan berziarah mengunjungi kota – kota bersejarah umat Islam di berbagai tujuan baik Timur Tengah hingga Benua Eropa dan Amerika. Daffa Tour menawarkan paket – paket perjalanan ibadah yang berkualitas dan terjangkau sesuai dengan kebutuhan loyal customer, kami merencanakan setiap perjalanan dengan benefit dan kepastian keberangkatan dengan pendampingan Muthowif dan Tour Leader terbaik. Daffa Tour hadir dengan harapan akan memfasilitasi ibadah bagi para jamaah Umroh / Umroh VIP bagi setiap jamaah yang ingin mewujudkan beribadah di Tanah Suci dengan khusyu. Ditengah maraknya persaingan Bisnis Travel, kami berharap Daffa Tour akan tetap eksis bertahan dengan memperhatikan Good Service, Good Quality & Good Price (3G).'}
+                            {t('about.description')}
                         </p>
 
                         <div className="grid grid-cols-2 gap-8 pt-8">
