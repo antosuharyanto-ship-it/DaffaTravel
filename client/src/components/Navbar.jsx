@@ -134,7 +134,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Menu */}
-                    <div className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-2xl transition-all duration-300 origin-top ${isOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
+                    <div className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-2xl transition-all duration-300 origin-top ${isOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
                         }`}>
                         <div className="flex flex-col p-6 space-y-4">
                             {['Home', 'Packages', 'About', 'Contact'].map((item) => (
