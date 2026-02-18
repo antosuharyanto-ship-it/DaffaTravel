@@ -32,29 +32,34 @@ const AdminDashboard = () => {
                 api.get('/transactions')
             ]);
             setPackages(pkgsRes.data);
-            try {
-                const [galleryRes, testimonialsRes, articlesRes, leadsRes, usersRes] = await Promise.all([
-                    api.get('/gallery'),
-                    api.get('/testimonials'),
-                    api.get('/articles'),
-                    api.get('/leads'),
-                    api.get('/auth/users')
-                ]);
-                setGallery(galleryRes.data);
-                setTestimonials(testimonialsRes.data);
-                setArticles(articlesRes.data);
-                setLeads(leadsRes.data);
-                setUsers(usersRes.data);
-            } catch (err) {
-                console.warn("Some data could not be fetched", err);
-            }
+
+            // Fetch secondary resources independently to prevent one failure from blocking all
+            const fetchSecondary = async (endpoint, setter) => {
+                try {
+                    const res = await api.get(endpoint);
+                    setter(res.data);
+                    return res.data;
+                } catch (err) {
+                    console.warn(`Failed to fetch ${endpoint}`, err);
+                    return [];
+                }
+            };
+
+            const [galleryData, testimonialsData, articlesData, leadsData, usersData] = await Promise.all([
+                fetchSecondary('/gallery', setGallery),
+                fetchSecondary('/testimonials', setTestimonials),
+                fetchSecondary('/articles', setArticles),
+                fetchSecondary('/leads', setLeads),
+                fetchSecondary('/auth/users', setUsers)
+            ]);
+
             setStats({
                 packages: pkgsRes.data.length,
                 bookings: bookingsRes.data.length,
-                users: new Set(bookingsRes.data.map(b => b.userId)).size
+                users: usersData.length || new Set(bookingsRes.data.map(b => b.userId)).size
             });
         } catch (error) {
-            console.error("Error fetching admin data", error);
+            console.error("Critical error fetching admin data", error);
         } finally {
             setLoading(false);
         }
