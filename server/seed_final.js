@@ -89,7 +89,10 @@ const packages = [
 ];
 
 async function seed() {
-    console.log("Cleaning up existing packages...");
+    console.log("Cleaning up existing data...");
+    await prisma.lead.deleteMany({});
+    await prisma.testimony.deleteMany({});
+    await prisma.booking.deleteMany({});
     await prisma.package.deleteMany({});
 
     console.log("Seeding packages...");

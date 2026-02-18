@@ -7,9 +7,9 @@ const packageRoutes = require('./routes/packages.routes');
 const branchRoutes = require('./routes/branches.routes');
 const transactionRoutes = require('./routes/transactions.routes');
 const chatbotRoutes = require('./routes/chatbot.routes');
-const galleryRoutes = require('./src/routes/gallery.routes');
-const testimonyRoutes = require('./src/routes/testimony.routes');
-const articleRoutes = require('./src/routes/article.routes');
+const galleryRoutes = require('./routes/gallery.routes');
+const testimonyRoutes = require('./routes/testimony.routes');
+const articleRoutes = require('./routes/article.routes');
 const leadRoutes = require('./routes/lead.routes');
 
 app.use(cors({
