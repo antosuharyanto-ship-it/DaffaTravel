@@ -83,7 +83,7 @@ const LeadForm = () => {
                                         </div>
                                         <div>
                                             <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Email</p>
-                                            <p className="text-sm font-bold text-white">info@daffatour.com</p>
+                                            <p className="text-sm font-bold text-white">daffatourstravel3@gmail.com</p>
                                         </div>
                                     </div>
                                 </div>
