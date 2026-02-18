@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             setUser(user);
-            return { success: true };
+            return { success: true, mustChangePassword: user.mustChangePassword };
         } catch (error) {
             console.error("Login failed", error);
             return { success: false, error: error.response?.data?.error || 'Login failed' };
