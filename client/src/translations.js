@@ -9,7 +9,9 @@ export const translations = {
             register: 'Register',
             dashboard: 'Dashboard',
             admin: 'Admin',
-            logout: 'Logout'
+            logout: 'Logout',
+            gallery: 'Gallery',
+            articles: 'Articles'
         },
         hero: {
             subtitle: 'A Journey of Serenity & Devotion',
@@ -191,7 +193,9 @@ export const translations = {
             register: 'Daftar',
             dashboard: 'Dasbor',
             admin: 'Admin',
-            logout: 'Keluar'
+            logout: 'Keluar',
+            gallery: 'Galeri',
+            articles: 'Artikel'
         },
         hero: {
             subtitle: 'Perjalanan Ketenangan & Pengabdian',
@@ -373,7 +377,9 @@ export const translations = {
             register: 'تسجيل',
             dashboard: 'لوحة التحكم',
             admin: 'مشرف',
-            logout: 'تسجيل خروج'
+            logout: 'تسجيل خروج',
+            gallery: 'معرض الصور',
+            articles: 'مقالات'
         },
         hero: {
             subtitle: 'رحلة من الصفاء والتفاني',
