@@ -86,4 +86,26 @@ const updateUserRole = async (req, res) => {
     }
 };
 
-module.exports = { register, login, getUsers, updateUserRole };
+const adminResetPassword = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { password } = req.body;
+
+        if (!password) {
+            return res.status(400).json({ error: 'Password is required' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await prisma.user.update({
+            where: { id: parseInt(id) },
+            data: { password: hashedPassword }
+        });
+
+        res.json({ message: 'Password reset successfully' });
+    } catch (error) {
+        console.error("Error resetting password", error);
+        res.status(500).json({ error: 'Error resetting password' });
+    }
+};
+
+module.exports = { register, login, getUsers, updateUserRole, adminResetPassword };

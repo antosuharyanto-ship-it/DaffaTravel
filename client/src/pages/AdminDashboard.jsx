@@ -192,6 +192,21 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleAdminResetPassword = async (userId) => {
+        const newPassword = window.prompt('Enter new password for this user:');
+        if (!newPassword || newPassword.length < 6) {
+            if (newPassword) alert('Password must be at least 6 characters');
+            return;
+        }
+
+        try {
+            await api.put(`/auth/users/${userId}/reset-password`, { password: newPassword });
+            alert('Password reset successfully');
+        } catch (error) {
+            alert('Password reset failed');
+        }
+    };
+
     const handleUpdateLeadStatus = async (leadId, newStatus) => {
         try {
             await api.put(`/leads/${leadId}`, { status: newStatus });
@@ -749,15 +764,24 @@ const AdminDashboard = () => {
                                                         </span>
                                                     </td>
                                                     <td className="p-6">
-                                                        <select
-                                                            value={user.role}
-                                                            onChange={(e) => handleUpdateUserRole(user.id, e.target.value)}
-                                                            className="p-2 rounded-xl border border-slate-100 text-xs font-bold outline-none focus:border-secondary"
-                                                        >
-                                                            <option value="CUSTOMER">Customer</option>
-                                                            <option value="AGENT">Agent</option>
-                                                            <option value="ADMIN">Admin</option>
-                                                        </select>
+                                                        <div className="flex items-center gap-2">
+                                                            <select
+                                                                value={user.role}
+                                                                onChange={(e) => handleUpdateUserRole(user.id, e.target.value)}
+                                                                className="p-2 rounded-xl border border-slate-100 text-xs font-bold outline-none focus:border-secondary bg-white"
+                                                            >
+                                                                <option value="CUSTOMER">Customer</option>
+                                                                <option value="AGENT">Agent</option>
+                                                                <option value="ADMIN">Admin</option>
+                                                            </select>
+                                                            <button
+                                                                onClick={() => handleAdminResetPassword(user.id)}
+                                                                className="p-2 text-slate-300 hover:text-secondary transition-colors"
+                                                                title="Reset Password"
+                                                            >
+                                                                <ShieldCheck size={18} />
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))}
