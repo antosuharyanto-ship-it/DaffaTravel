@@ -39,6 +39,7 @@ model User {
   updatedAt DateTime @updatedAt
   bookings  Booking[]
   testimonials Testimony[]
+  mustChangePassword Boolean @default(false)
 }
 
 model Branch {

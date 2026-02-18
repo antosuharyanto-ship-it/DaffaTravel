@@ -14,6 +14,7 @@ import AdminRoute from './components/AdminRoute';
 import GalleryPage from './pages/GalleryPage';
 import ArticlesPage from './pages/ArticlesPage';
 import ArticleDetailPage from './pages/ArticleDetailPage';
+import ForceChangePasswordPage from './pages/ForceChangePasswordPage';
 import './App.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/articles" element={<ArticlesPage />} />
               <Route path="/articles/:id" element={<ArticleDetailPage />} />
+              <Route path="/force-change-password" element={<ForceChangePasswordPage />} />
               <Route
                 path="/admin"
                 element={

@@ -54,7 +54,17 @@ const login = async (req, res) => {
         // Generate Token
         const token = generateToken(user);
 
-        res.json({ message: 'Login successful', token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
+        res.json({
+            message: 'Login successful',
+            token,
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                mustChangePassword: user.mustChangePassword
+            }
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error during login' });
@@ -98,7 +108,10 @@ const adminResetPassword = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         await prisma.user.update({
             where: { id: parseInt(id) },
-            data: { password: hashedPassword }
+            data: {
+                password: hashedPassword,
+                mustChangePassword: true
+            }
         });
 
         res.json({ message: 'Password reset successfully' });
@@ -108,4 +121,29 @@ const adminResetPassword = async (req, res) => {
     }
 };
 
-module.exports = { register, login, getUsers, updateUserRole, adminResetPassword };
+const forceChangePassword = async (req, res) => {
+    try {
+        const userId = req.user.id; // From authenticate middleware
+        const { newPassword } = req.body;
+
+        if (!newPassword || newPassword.length < 6) {
+            return res.status(400).json({ error: 'New password must be at least 6 characters' });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await prisma.user.update({
+            where: { id: userId },
+            data: {
+                password: hashedPassword,
+                mustChangePassword: false
+            }
+        });
+
+        res.json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error("Error updating password", error);
+        res.status(500).json({ error: 'Error updating password' });
+    }
+};
+
+module.exports = { register, login, getUsers, updateUserRole, adminResetPassword, forceChangePassword };

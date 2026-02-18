@@ -16,7 +16,11 @@ const LoginPage = () => {
         setError('');
         const result = await login(email, password);
         if (result.success) {
-            navigate('/');
+            if (result.mustChangePassword) {
+                navigate('/force-change-password');
+            } else {
+                navigate('/');
+            }
         } else {
             setError(result.error);
         }
