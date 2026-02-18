@@ -15,6 +15,8 @@ import GalleryPage from './pages/GalleryPage';
 import ArticlesPage from './pages/ArticlesPage';
 import ArticleDetailPage from './pages/ArticleDetailPage';
 import ForceChangePasswordPage from './pages/ForceChangePasswordPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import './App.css';
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
               <Route path="/articles" element={<ArticlesPage />} />
               <Route path="/articles/:id" element={<ArticleDetailPage />} />
               <Route path="/force-change-password" element={<ForceChangePasswordPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route
                 path="/admin"
                 element={

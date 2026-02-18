@@ -544,10 +544,10 @@ const AdminDashboard = () => {
                                                     </td>
                                                     <td className="p-6">
                                                         <div className="text-sm font-medium text-slate-600">
-                                                            {new Date(booking.createdAt).toLocaleDateString()}
+                                                            {booking.createdAt ? new Date(booking.createdAt).toLocaleDateString() : 'N/A'}
                                                         </div>
                                                         <div className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-widest">
-                                                            {new Date(booking.createdAt).toLocaleTimeString()}
+                                                            {booking.createdAt ? new Date(booking.createdAt).toLocaleTimeString() : ''}
                                                         </div>
                                                     </td>
                                                     <td className={`p-6 ${language === 'ar' ? 'text-left' : 'text-right'}`}>
@@ -824,7 +824,7 @@ const AdminDashboard = () => {
                                                     <td className="p-6">
                                                         <div className="text-sm font-black text-slate-700">{lead.package?.title || 'General Interest'}</div>
                                                         <div className="text-xs text-slate-400 mt-1 flex items-center">
-                                                            <Calendar size={12} className="mr-1" /> {new Date(lead.preferredDate).toLocaleDateString()}
+                                                            <Calendar size={12} className="mr-1" /> {lead.preferredDate ? new Date(lead.preferredDate).toLocaleDateString() : 'N/A'}
                                                         </div>
                                                     </td>
                                                     <td className="p-6">

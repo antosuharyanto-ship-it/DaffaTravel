@@ -13,14 +13,9 @@ const Footer = () => {
                             <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white p-2 shadow-2xl">
                                 <img src={logo} alt="Daffa Travel" className="h-full w-full object-contain" />
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-2xl font-serif font-black tracking-[-0.05em] leading-none">
-                                    DAFFA <span className="text-secondary italic">TOUR</span>
-                                </span>
-                                <span className="text-[10px] text-slate-400 font-black tracking-[0.4em] uppercase">
-                                    & TRAVEL
-                                </span>
-                            </div>
+                            <span className="text-2xl font-serif font-black tracking-[-0.05em] leading-none">
+                                DAFFA <span className="text-secondary italic">TOUR</span>
+                            </span>
                         </Link>
                         <div className="space-y-4">
                             <p className="text-secondary text-[10px] font-black uppercase tracking-[0.2em]">
@@ -37,7 +32,7 @@ const Footer = () => {
                             <a href="https://www.instagram.com/daffa.umrah/" className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 text-white shadow-xl">
                                 <Instagram size={20} />
                             </a>
-                            <a href="https://wa.me/6287768062507" className="w-12 h-12 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/30 flex items-center justify-center hover:bg-[#25D366] transition-all duration-300 text-white shadow-xl">
+                            <a href="https://wa.me/628161616372" className="w-12 h-12 rounded-2xl bg-[#25D366]/20 border border-[#25D366]/30 flex items-center justify-center hover:bg-[#25D366] transition-all duration-300 text-white shadow-xl">
                                 <Phone size={20} />
                             </a>
                         </div>
@@ -89,7 +84,7 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center space-x-3">
                                 <Phone size={18} className="text-secondary shrink-0" />
-                                <span>0877 6806 2507</span>
+                                <span>0816 1616 372</span>
                             </li>
                             <li className="flex items-center space-x-3">
                                 <Mail size={18} className="text-secondary shrink-0" />

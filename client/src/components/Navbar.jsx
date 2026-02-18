@@ -50,9 +50,6 @@ const Navbar = () => {
                                     }`}>
                                     DAFFA <span className="text-secondary italic">TRAVEL</span>
                                 </span>
-                                <span className={`text-[8px] md:text-[10px] uppercase tracking-[0.2em] font-extrabold truncate ${scrolled || !isHome ? 'text-slate-500' : 'text-slate-300'}`}>
-                                    {t('footer.company')}
-                                </span>
                             </div>
                         </Link>
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { MessageCircle } from 'lucide-react';
 
 const WhatsAppLink = () => {
-    const phoneNumber = '6287768062507';
+    const phoneNumber = '628161616372';
     const message = 'Halo Daffa Tour, saya ingin bertanya tentang paket Umroh/Haji/Wisata.';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
