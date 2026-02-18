@@ -12,6 +12,7 @@ const AdminDashboard = () => {
     const [testimonials, setTestimonials] = useState([]);
     const [articles, setArticles] = useState([]);
     const [leads, setLeads] = useState([]);
+    const [bookings, setBookings] = useState([]);
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddForm, setShowAddForm] = useState(false);
@@ -32,6 +33,7 @@ const AdminDashboard = () => {
                 api.get('/transactions')
             ]);
             setPackages(pkgsRes.data);
+            setBookings(bookingsRes.data);
 
             // Fetch secondary resources independently to prevent one failure from blocking all
             const fetchSecondary = async (endpoint, setter) => {
@@ -515,11 +517,38 @@ const AdminDashboard = () => {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-slate-100">
-                                            <tr>
-                                                <td colSpan="4" className="p-24 text-center text-slate-400 font-serif italic text-2xl opacity-40">
-                                                    {t('admin.table.noData')}
-                                                </td>
-                                            </tr>
+                                            {bookings.map(booking => (
+                                                <tr key={booking.id} className="hover:bg-slate-50 transition-colors">
+                                                    <td className="p-6">
+                                                        <div className="font-bold text-slate-900">{booking.user?.name}</div>
+                                                        <div className="text-xs text-slate-400">{booking.user?.email}</div>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <div className="text-sm font-black text-slate-700">{booking.package?.title}</div>
+                                                        <div className="text-xs text-slate-400 mt-1 uppercase tracking-widest">{booking.package?.type}</div>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <div className="text-sm font-medium text-slate-600">
+                                                            {new Date(booking.createdAt).toLocaleDateString()}
+                                                        </div>
+                                                        <div className="text-[10px] text-slate-400 mt-0.5 uppercase tracking-widest">
+                                                            {new Date(booking.createdAt).toLocaleTimeString()}
+                                                        </div>
+                                                    </td>
+                                                    <td className={`p-6 ${language === 'ar' ? 'text-left' : 'text-right'}`}>
+                                                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest ${booking.status === 'CONFIRMED' ? 'bg-emerald-50 text-emerald-600' : booking.status === 'PENDING' ? 'bg-amber-50 text-amber-600' : 'bg-slate-50 text-slate-400'}`}>
+                                                            {booking.status}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                            {bookings.length === 0 && (
+                                                <tr>
+                                                    <td colSpan="4" className="p-24 text-center text-slate-400 font-serif italic text-2xl opacity-40">
+                                                        {t('admin.table.noData')}
+                                                    </td>
+                                                </tr>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
