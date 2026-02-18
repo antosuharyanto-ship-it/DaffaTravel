@@ -58,14 +58,14 @@ const Navbar = () => {
 
                         {/* Desktop Menu */}
                         <div className="hidden lg:flex items-center space-x-8 xl:space-x-10">
-                            {['home', 'packages', 'about', 'contact'].map((key) => (
+                            {['home', 'packages', 'gallery', 'articles', 'about', 'contact'].map((key) => (
                                 <Link
                                     key={key}
                                     to={key === 'home' ? '/' : `/${key}`}
                                     className={`text-[12px] font-bold tracking-[0.1em] uppercase hover:text-secondary transition-all duration-300 relative group/link ${scrolled || !isHome ? 'text-slate-800' : 'text-white'
                                         }`}
                                 >
-                                    {t(`nav.${key}`)}
+                                    {t(`nav.${key}`) || (key.charAt(0).toUpperCase() + key.slice(1))}
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover/link:w-full"></span>
                                 </Link>
                             ))}
@@ -137,7 +137,7 @@ const Navbar = () => {
                     <div className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-2xl transition-all duration-300 origin-top ${isOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 pointer-events-none'
                         }`}>
                         <div className="flex flex-col p-6 space-y-4">
-                            {['Home', 'Packages', 'About', 'Contact'].map((item) => (
+                            {['Home', 'Packages', 'Gallery', 'Articles', 'About', 'Contact'].map((item) => (
                                 <Link
                                     key={item}
                                     to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}

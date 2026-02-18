@@ -5,7 +5,9 @@ import Hero from '../components/Hero';
 import CategorySection from '../components/CategorySection';
 import WhatsAppLink from '../components/WhatsAppLink';
 import WhyChooseUs from '../components/WhyChooseUs';
-import CampaignSpotlight from '../components/CampaignSpotlight';
+import TestimonialsSection from '../components/TestimonialsSection';
+import GallerySneakPeek from '../components/GallerySneakPeek';
+import LatestArticles from '../components/LatestArticles';
 import PackageCard from '../components/PackageCard';
 import LeadForm from '../components/LeadForm';
 import { useLanguage } from '../context/LanguageContext';
@@ -37,7 +39,9 @@ const HomePage = () => {
             <Hero />
             <CategorySection />
             <WhyChooseUs />
-            <CampaignSpotlight />
+            <LatestArticles />
+            <GallerySneakPeek />
+            <TestimonialsSection />
             <LeadForm />
 
             <section className="container mx-auto px-4 py-24">

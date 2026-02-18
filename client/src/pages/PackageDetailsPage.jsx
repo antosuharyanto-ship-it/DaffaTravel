@@ -12,14 +12,22 @@ const PackageDetailsPage = () => {
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
     const [bookingStatus, setBookingStatus] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [reviewForm, setReviewForm] = useState({ rating: 5, content: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const fetchPackage = async () => {
             try {
-                const res = await api.get(`/packages/${id}`);
-                setPkg(res.data);
+                const [pkgRes, reviewsRes] = await Promise.all([
+                    api.get(`/packages/${id}`),
+                    api.get(`/testimonials?packageId=${id}`)
+                ]);
+                setPkg(pkgRes.data);
+                // Filter reviews manually if backend doesn't support query yet
+                setReviews(reviewsRes.data.filter(r => r.packageId === parseInt(id)));
             } catch (error) {
-                console.error("Error fetching package", error);
+                console.error("Error fetching package details", error);
             } finally {
                 setLoading(false);
             }
@@ -34,6 +42,28 @@ const PackageDetailsPage = () => {
             setBookingStatus('booked');
         } catch (error) {
             alert('Booking failed: ' + (error.response?.data?.error || error.message));
+        }
+    };
+
+    const handleReviewSubmit = async (e) => {
+        e.preventDefault();
+        if (!user) return alert('Please login to review');
+        if (!reviewForm.content) return;
+
+        setIsSubmitting(true);
+        try {
+            const res = await api.post('/testimonials', {
+                ...reviewForm,
+                packageId: parseInt(id)
+            });
+            setReviews([res.data, ...reviews]);
+            setReviewForm({ rating: 5, content: '' });
+            alert(t('reviews.success'));
+        } catch (error) {
+            console.error("Error submitting review", error);
+            alert('Failed to submit review');
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -142,6 +172,98 @@ const PackageDetailsPage = () => {
                             <p className="text-center text-slate-400 text-[10px] font-bold uppercase tracking-widest mt-6 opacity-60">
                                 {t('packages.bookingNote')}
                             </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Reviews Section */}
+                <div className="mt-32 space-y-12">
+                    <div className="max-w-2xl">
+                        <h2 className="text-4xl font-serif font-black text-slate-900 mb-4">{t('reviews.title')}</h2>
+                        <p className="text-slate-500">{t('reviews.subtitle')}</p>
+                    </div>
+
+                    <div className="grid lg:grid-cols-3 gap-12">
+                        {/* Review Form */}
+                        <div className="lg:col-span-1">
+                            {user ? (
+                                <form onSubmit={handleReviewSubmit} className="bg-slate-50 p-8 rounded-[2rem] space-y-6 border border-slate-100 shadow-sm sticky top-32">
+                                    <h3 className="text-xl font-black text-slate-900 uppercase tracking-wider">{t('reviews.addReview')}</h3>
+                                    <div>
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-3">{t('reviews.rating')}</label>
+                                        <div className="flex gap-2">
+                                            {[1, 2, 3, 4, 5].map(num => (
+                                                <button
+                                                    key={num}
+                                                    type="button"
+                                                    onClick={() => setReviewForm({ ...reviewForm, rating: num })}
+                                                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${reviewForm.rating >= num ? 'bg-secondary text-white shadow-lg shadow-secondary/20' : 'bg-white text-slate-300 border border-slate-100'
+                                                        }`}
+                                                >
+                                                    <Star size={18} fill={reviewForm.rating >= num ? "currentColor" : "none"} />
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 block mb-3">{t('reviews.comment')}</label>
+                                        <textarea
+                                            value={reviewForm.content}
+                                            onChange={(e) => setReviewForm({ ...reviewForm, content: e.target.value })}
+                                            className="w-full bg-white border border-slate-100 rounded-2xl p-4 min-h-[120px] focus:ring-2 focus:ring-primary/20 outline-none transition-all text-slate-700"
+                                            placeholder="..."
+                                        ></textarea>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting || !reviewForm.content}
+                                        className="w-full btn-primary disabled:opacity-50"
+                                    >
+                                        {isSubmitting ? 'Posting...' : t('reviews.submit')}
+                                    </button>
+                                </form>
+                            ) : (
+                                <div className="bg-slate-50 p-8 rounded-[2rem] border border-dashed border-slate-300 text-center">
+                                    <p className="text-slate-500 italic mb-4">Please login to share your experience</p>
+                                    <Link to="/login" className="text-primary font-black uppercase text-xs tracking-widest">Login Now &rarr;</Link>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Reviews List */}
+                        <div className="lg:col-span-2 space-y-6">
+                            {reviews.length > 0 ? (
+                                reviews.map(review => (
+                                    <div key={review.id} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col md:flex-row gap-6">
+                                        <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 flex-shrink-0">
+                                            <Users size={32} />
+                                        </div>
+                                        <div className="flex-1">
+                                            <div className="flex justify-between items-start mb-4">
+                                                <div>
+                                                    <div className="font-serif font-black text-slate-900 uppercase tracking-wider">{review.name}</div>
+                                                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Verified Jamaah</div>
+                                                </div>
+                                                <div className="flex gap-0.5">
+                                                    {[...Array(review.rating)].map((_, i) => (
+                                                        <Star key={i} size={12} className="fill-secondary text-secondary" />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <p className="text-slate-600 font-light italic leading-relaxed text-lg">
+                                                "{review.content}"
+                                            </p>
+                                            <div className="mt-4 text-[10px] text-slate-300 font-black uppercase tracking-[0.2em]">
+                                                {new Date(review.createdAt).toLocaleDateString()}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="py-20 text-center border-2 border-dashed border-slate-100 rounded-[3rem]">
+                                    <p className="text-slate-400 font-serif italic text-xl">{t('reviews.noReviews')}</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

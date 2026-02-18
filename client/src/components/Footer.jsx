@@ -60,10 +60,15 @@ const Footer = () => {
                     <div>
                         <h4 className="text-lg font-bold mb-6 text-secondary tracking-wider uppercase text-sm">Dokumentasi</h4>
                         <ul className="space-y-3 text-slate-400 text-sm">
-                            {['Galeri Dokumentasi', 'Testimoni Jamaah', 'Blog & Artikel', 'Kantor Cabang'].map((item) => (
-                                <li key={item} className="flex items-center space-x-2">
+                            {[
+                                { name: 'Galeri Dokumentasi', path: '/gallery' },
+                                { name: 'Testimoni Jamaah', path: '/' }, // HomePage auto-scrolls or has section
+                                { name: 'Blog & Artikel', path: '/articles' },
+                                { name: 'Kantor Cabang', path: '/contact' }
+                            ].map((item) => (
+                                <li key={item.name} className="flex items-center space-x-2">
                                     <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>
-                                    <span className="hover:text-white transition-colors cursor-pointer">{item}</span>
+                                    <Link to={item.path} className="hover:text-white transition-colors cursor-pointer">{item.name}</Link>
                                 </li>
                             ))}
                         </ul>

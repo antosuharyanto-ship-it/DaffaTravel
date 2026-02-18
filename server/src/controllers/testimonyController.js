@@ -12,21 +12,26 @@ const getTestimonials = async (req, res) => {
     }
 };
 
-// Create testimony (Admin or Logged in User - for now Admin only for simplicity)
+// Create testimony (Admin or Logged in User)
 const createTestimony = async (req, res) => {
     try {
         const { name, content, rating, imageUrl, packageId } = req.body;
+        const userId = req.user.id;
+        const userName = name || req.user.name; // Use provided name or logged in user's name
+
         const newTestimony = await prisma.testimony.create({
             data: {
-                name,
+                name: userName,
                 content,
                 rating: rating ? parseInt(rating) : 5,
                 imageUrl,
+                userId: userId,
                 packageId: packageId ? parseInt(packageId) : null
             }
         });
         res.status(201).json(newTestimony);
     } catch (error) {
+        console.error("Error creating testimony", error);
         res.status(500).json({ error: 'Error creating testimony' });
     }
 };

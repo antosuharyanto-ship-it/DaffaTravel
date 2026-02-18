@@ -153,6 +153,32 @@ export const translations = {
                 update: 'Update Package',
                 createBtn: 'Create Package'
             }
+        },
+        gallery: {
+            tag: 'Visual Journey',
+            title: 'Our Spiritual',
+            titleAccent: 'Moments',
+            desc: 'Explore the serenity and devotion captured through our journeys across the holy lands and beyond.',
+            noData: 'No photos found in this category.'
+        },
+        blog: {
+            tag: 'Spiritual Insights',
+            title: 'Guidance &',
+            titleAccent: 'Reflections',
+            desc: 'Deepen your spiritual understanding with our curated articles on Umrah, Hajj, and the beauty of faith explorations.',
+            noData: 'No articles published yet.',
+            latest: 'Latest Insights',
+            viewAll: 'View All Articles'
+        },
+        reviews: {
+            title: 'Jamaah Experiences',
+            subtitle: 'Real stories from those who walked the path of devotion with us.',
+            addReview: 'Share Your Experience',
+            rating: 'Your Rating',
+            comment: 'Describe your journey...',
+            submit: 'Post Review',
+            success: 'Thank you for sharing your journey!',
+            noReviews: 'Be the first to share your experience.'
         }
     },
     id: {
@@ -309,6 +335,32 @@ export const translations = {
                 update: 'Update Paket',
                 createBtn: 'Buat Paket'
             }
+        },
+        gallery: {
+            tag: 'Perjalanan Visual',
+            title: 'Momen',
+            titleAccent: 'Spiritual Kami',
+            desc: 'Jelajahi ketenangan dan pengabdian yang diabadikan melalui perjalanan kami di tanah suci dan sekitarnya.',
+            noData: 'Tidak ada foto ditemukan di kategori ini.'
+        },
+        blog: {
+            tag: 'Wawasan Spiritual',
+            title: 'Panduan &',
+            titleAccent: 'Refleksi',
+            desc: 'Perdalam pemahaman spiritual Anda dengan artikel pilihan kami tentang Umrah, Haji, dan keindahan penjelajahan iman.',
+            noData: 'Belum ada artikel yang dipublikasikan.',
+            latest: 'Wawasan Terbaru',
+            viewAll: 'Lihat Semua Artikel'
+        },
+        reviews: {
+            title: 'Pengalaman Jamaah',
+            subtitle: 'Kisah nyata dari mereka yang menempuh jalan pengabdian bersama kami.',
+            addReview: 'Bagikan Pengalaman Anda',
+            rating: 'Rating Anda',
+            comment: 'Ceritakan perjalanan Anda...',
+            submit: 'Kirim Ulasan',
+            success: 'Terima kasih telah berbagi perjalanan Anda!',
+            noReviews: 'Jadilah yang pertama membagikan pengalaman Anda.'
         }
     },
     ar: {
@@ -465,6 +517,32 @@ export const translations = {
                 update: 'تحديث الباقة',
                 createBtn: 'إنشاء باقة'
             }
+        },
+        gallery: {
+            tag: 'رحلة بصرية',
+            title: 'لحظاتنا',
+            titleAccent: 'الروحانية',
+            desc: 'استكشف الصفاء والتفاني الذي تم التقاطه من خلال رحلاتنا عبر الأراضي المقدسة وما وراءها.',
+            noData: 'لم يتم العثور على صور في هذه الفئة.'
+        },
+        blog: {
+            tag: 'رؤى روحية',
+            title: 'الإرشاد و',
+            titleAccent: 'التأملات',
+            desc: 'عمق فهمك الروحي من خلال مقالاتنا المنسقة حول العمرة والحج وجمال استكشافات الإيمان.',
+            noData: 'لم يتم نشر أي مقالات بعد.',
+            latest: 'أحدث الرؤى',
+            viewAll: 'عرض جميع المقالات'
+        },
+        reviews: {
+            title: 'تجارب الجماعة',
+            subtitle: 'قصص حقيقية من أولئك الذين ساروا في طريق التفاني معنا.',
+            addReview: 'شارك تجربتك',
+            rating: 'تقييمك',
+            comment: 'صف رحلتك...',
+            submit: 'نشر المراجعة',
+            success: 'شكراً لمشاركة رحلتك معنا!',
+            noReviews: 'كن أول من يشارك تجربته.'
         }
     }
 };
