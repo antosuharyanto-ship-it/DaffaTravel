@@ -732,6 +732,13 @@ const AdminDashboard = () => {
                                                     </td>
                                                 </tr>
                                             ))}
+                                            {users.length === 0 && (
+                                                <tr>
+                                                    <td colSpan="3" className="p-20 text-center text-slate-400 font-serif italic text-xl">
+                                                        No users found.
+                                                    </td>
+                                                </tr>
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
