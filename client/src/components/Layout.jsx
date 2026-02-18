@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Chatbot from './Chatbot';
+import RunningBanner from './RunningBanner';
 
 const Layout = ({ children }) => {
     return (
