@@ -16,7 +16,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/50 to-slate-900/95"></div>
             </div>
 
-            <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 pt-40 md:pt-48">
                 <div className="max-w-4xl">
                     <div className={`space-y-6 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
                         <h2 className="text-secondary font-black tracking-[0.3em] uppercase text-[10px] md:text-sm animate-fade-in flex items-center gap-4">
