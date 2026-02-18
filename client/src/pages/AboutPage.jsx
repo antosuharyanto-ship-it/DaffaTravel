@@ -23,7 +23,7 @@ const AboutPage = () => {
                                 {t('about.tagline') || 'SINCE 2009'}
                             </h4>
                             <h1 className="text-5xl md:text-7xl font-serif font-black text-slate-900 leading-[1.1]">
-                                {t('about.title') || 'Crafting Your'} <br />
+                                {t('about.aboutTitle') || 'Introduction'} <br />
                                 <span className="text-secondary italic">{t('about.titleAccent') || 'Sacred Journey'}</span>
                             </h1>
                         </div>
@@ -52,6 +52,35 @@ const AboutPage = () => {
                         </div>
                         <div className="absolute -top-10 -right-10 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
                         <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Legal Section */}
+            <section className="container mx-auto px-4 mb-24">
+                <div className="bg-slate-50 rounded-[3rem] p-12 md:p-20 shadow-inner">
+                    <div className="max-w-4xl">
+                        <div className="flex items-center gap-4 mb-10">
+                            <div className="h-px flex-1 bg-slate-200"></div>
+                            <h2 className="text-3xl md:text-4xl font-serif font-black text-slate-900 uppercase tracking-tight">
+                                {t('about.legalTitle') || 'Legal & Licensing'}
+                            </h2>
+                            <div className="h-px flex-1 bg-slate-200"></div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+                            {(t('about.legalItems') || [
+                                'Akta Pendirian No. 20.- Tanggal 22 Februari 2013',
+                                'Tanda Daftar Usaha Biro Perjalanan Wisata',
+                                'Izin PPIU No. 02780100619940003 Tahun 2023',
+                                'NPWP No. 71.519.960.0-029.000'
+                            ]).map((item, i) => (
+                                <div key={i} className="flex gap-4 items-start group">
+                                    <div className="w-2 h-2 rounded-full bg-secondary mt-2 group-hover:scale-150 transition-transform"></div>
+                                    <p className="text-slate-600 text-sm font-light leading-relaxed">{item}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>

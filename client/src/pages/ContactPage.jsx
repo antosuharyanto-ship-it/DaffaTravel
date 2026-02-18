@@ -42,20 +42,34 @@ const ContactPage = () => {
                     </h1>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {contactMethods.map((method, i) => (
-                        <a
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {(t('offices.list') || []).map((office, i) => (
+                        <div
                             key={i}
-                            href={method.link}
-                            className="glass-card !bg-white p-12 border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center group"
+                            className="glass-card !bg-white p-10 border-slate-100 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group flex flex-col"
                         >
-                            <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                {method.icon}
+                            <div className="flex items-start justify-between mb-6">
+                                <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-all">
+                                    <MapPin size={24} />
+                                </div>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-3 py-1 rounded-full">{office.name}</span>
                             </div>
-                            <h3 className="text-xl font-serif font-black text-slate-900 mb-2">{method.title}</h3>
-                            <p className="text-slate-400 text-xs mb-4">{method.desc}</p>
-                            <span className="text-primary font-bold">{method.value}</span>
-                        </a>
+                            <h3 className="text-xl font-serif font-black text-slate-900 mb-2">{office.location}</h3>
+                            <p className="text-slate-500 text-xs font-light leading-relaxed mb-6 flex-grow">{office.address}</p>
+
+                            {office.phone && (
+                                <div className="pt-4 border-t border-slate-50 mt-auto">
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Phone</p>
+                                    <p className="text-primary font-bold">{office.phone}</p>
+                                </div>
+                            )}
+                            {office.contact && (
+                                <div className="pt-4 border-t border-slate-50 mt-auto">
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Contact</p>
+                                    <p className="text-primary font-bold text-xs">{office.contact}</p>
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </div>
             </section>

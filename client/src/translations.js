@@ -11,14 +11,31 @@ export const translations = {
             admin: 'Admin',
             logout: 'Logout',
             gallery: 'Gallery',
-            articles: 'Articles'
+            articles: 'Articles',
+            aboutTitle: 'Introduction'
+        },
+        contact: {
+            tagline: 'Get in Touch',
+            title: 'Contact',
+            titleAccent: 'Us',
+        },
+        offices: {
+            title: 'Our Network',
+            list: [
+                { name: 'Head Office', location: 'Sudirman Park', address: 'Tower B unit B 31 CJ, Jl. KH. Mas Mansyur Kav. 35 Karet Tengsin, Tanah Abang – Jakarta Pusat 10250', phone: '0877-6806-2507' },
+                { name: 'Branch Office', location: 'Puri Kembangan', address: 'Jl. Kembang kerep No.07 Rw.2, Kembangan Selatan, Kec. Kembangan, Kota Jakarta Barat' },
+                { name: 'Representative Agent', location: 'East Kalimantan (Balikpapan)', address: 'MT. Haryono Jl. Almakmur 02 RT.31 No.14.B Kel. Damai Balikpapan City', contact: '0811-539-494 (Ibu Nana)' },
+                { name: 'Representative Agent', location: 'South Kalimantan (Banjarmasin)', address: 'Jl. Sutoyo S. Komplek Wildan Sari 1 G No.46 Kel. Telaga Biru Banjarmasin, South Kalimantan', contact: '0852-4999-6090 (Susi), 0852-5195-1110 (Ami), 0896-8051-3764 (Ilham)' },
+                { name: 'Representative Agent', location: 'Riau', address: 'Jl. Tengku Zainal Abidin, Kota Tinggi Kec., Pekanbaru Riau 28155', contact: '0821-3221-6515 (Ibu Rika)' },
+                { name: 'Representative Agent', location: 'Bogor', address: 'Kp. Sampiran RT 01/04 Desa Pangaur, Kec. Jasinga, Kab. Bogor', contact: '0858-9435-7559 (Bpk Musdario)' }
+            ]
         },
         hero: {
-            subtitle: 'A Journey of Serenity & Devotion',
+            subtitle: 'Sahabat Perjalanan Anda',
             title: 'A Way to Talk to',
             titleAccent: 'Allah SWT',
             description: 'Experience spiritual peace and holistic care. We craft every detail of your Umrah & Hajj journey so you can focus on what truly matters—your connection with the Divine.',
-            cta: 'Discover Our Story',
+            cta: 'Introduction',
             searchPlaceholder: 'Where to go?',
             categoryPlaceholder: 'All Packages',
             searchButton: 'Search'
@@ -183,7 +200,8 @@ export const translations = {
             noReviews: 'Be the first to share your experience.'
         },
         about: {
-            description: 'Daffa Tours is part of PT. Anditi Kreasi Mandiri, dedicated to providing Umrah and VIP Umrah services with various incentive tours to enhance the devotion of your journey. We visit historical Islamic cities across the Middle East, Europe, and America. Daffa Tour offers high-quality, affordable packages tailored to loyal customers, ensuring every trip provides benefits and guaranteed departures with the best Mutawwif and Tour Leaders. Daffa Tour aims to facilitate worship for all pilgrims seeking to perform their rites in the Holy Land with full devotion. Amidst growing travel competition, we remain committed to our 3G philosophy: Good Service, Good Quality & Good Price (3G).'
+            description: 'Daffa Tours is part of PT. Anditi Kreasi Mandiri, dedicated to providing Umrah and VIP Umrah services with various incentive tours to enhance the devotion of your journey. We visit historical Islamic cities across the Middle East, Europe, and America. Daffa Tour offers high-quality, affordable packages tailored to loyal customers, ensuring every trip provides benefits and guaranteed departures with the best Mutawwif and Tour Leaders. Daffa Tour aims to facilitate worship for all pilgrims seeking to perform their rites in the Holy Land with full devotion. Amidst growing travel competition, we remain committed to our 3G philosophy: Good Service, Good Quality & Good Price (3G).',
+            legalTitle: 'Legal & Business Licensing'
         }
     },
     id: {
@@ -198,14 +216,31 @@ export const translations = {
             admin: 'Admin',
             logout: 'Keluar',
             gallery: 'Galeri',
-            articles: 'Artikel'
+            articles: 'Artikel',
+            aboutTitle: 'Tak Kenal Maka Tak Sayang'
+        },
+        contact: {
+            tagline: 'Hubungi Kami',
+            title: 'Hubungi',
+            titleAccent: 'Kami',
+        },
+        offices: {
+            title: 'Kantor - Kantor Perwakilan',
+            list: [
+                { name: 'Kantor Pusat', location: 'Sudirman Park (Head Office)', address: 'Tower B unit B 31 CJ, Jl. KH. Mas Mansyur Kav. 35 Karet Tengsin, Tanah Abang – Jakarta Pusat 10250', phone: '0877-6806-2507' },
+                { name: 'Kantor Cabang', location: 'Puri Kembangan (Head Cabang)', address: 'Jl. Kembang kerep No.07 Rw.2, Kembangan Selatan, Kec. Kembangan, Kota Jakarta Barat' },
+                { name: 'Agent Perwakilan', location: 'Kalimantan Timur (Balikpapan)', address: 'MT. Haryono Jl. Almakmur 02 RT.31 No.14.B Kel. Damai Balikpapan Kota', contact: '0811-539-494 (Ibu Nana)' },
+                { name: 'Agent Perwakilan', location: 'Kalimantan Selatan (Banjarmasin)', address: 'Jl. Sutoyo S. Komplek Wildan Sari 1 G No.46 Kel. Telaga Biru Banjarmasin, Kalimantan Selatan', contact: '0852-4999-6090 (Susi), 0852-5195-1110 (Ami), 0896-8051-3764 (Ilham)' },
+                { name: 'Agent Perwakilan', location: 'Riau', address: 'Jl. Tengku Zainal Abidin, Kota Tinggi Kec., Pekanbaru Riau 28155', contact: '0821-3221-6515 (Ibu Rika)' },
+                { name: 'Agent Perwakilan', location: 'Bogor', address: 'Kp. Sampiran RT 01/04 Desa Pangaur, Kec. Jasinga, Kab. Bogor', contact: '0858-9435-7559 (Bpk Musdario)' }
+            ]
         },
         hero: {
-            subtitle: 'Perjalanan Ketenangan & Pengabdian',
+            subtitle: 'Sahabat Perjalanan Anda',
             title: 'Langkah Menuju Karunia',
             titleAccent: 'Allah SWT',
             description: 'Rasakan ketenangan spiritual dan perawatan holistik. Kami merancang setiap detail perjalanan Umrah & Haji Anda sehingga Anda dapat fokus pada apa yang benar-benar penting—hubungan Anda dengan Sang Pencipta.',
-            cta: 'Pelajari Kisah Kami',
+            cta: 'Introduction',
             searchPlaceholder: 'Ke mana?',
             categoryPlaceholder: 'Semua Paket',
             searchButton: 'Cari'
@@ -370,7 +405,22 @@ export const translations = {
             noReviews: 'Jadilah yang pertama membagikan pengalaman Anda.'
         },
         about: {
-            description: 'Daffa Tours adalah bagian dari PT. Anditi Kreasi Mandiri yang beroperasi untuk memberikan pelayanan ibadah Umroh / Umroh VIP dengan berbagai macam tour insentif yang dapat memperkuat kekhusuan ibadah perjalanan Anda, dengan berziarah mengunjungi kota – kota bersejarah umat Islam di berbagai tujuan baik Timur Tengah hingga Benua Eropa dan Amerika. Daffa Tour menawarkan paket – paket perjalanan ibadah yang berkualitas dan terjangkau sesuai dengan kebutuhan loyal customer, kami merencanakan setiap perjalanan dengan benefit dan kepastian keberangkatan dengan pendampingan Muthowif dan Tour Leader terbaik. Daffa Tour hadir dengan harapan akan memfasilitasi ibadah bagi para jamaah Umroh / Umroh VIP bagi setiap jamaah yang ingin mewujudkan beribadah di Tanah Suci dengan khusyu. Ditengah maraknya persaingan Bisnis Travel, kami berharap Daffa Tour akan tetap eksis bertahan dengan memperhatikan Good Service, Good Quality & Good Price (3G).'
+            description: 'Daffa Tours adalah bagian dari PT. Anditi Kreasi Mandiri yang beroperasi untuk memberikan pelayanan ibadah Umroh / Umroh VIP dengan berbagai macam tour insentif yang dapat memperkuat kekhusuan ibadah perjalanan Anda, dengan berziarah mengunjungi kota – kota bersejarah umat Islam di berbagai tujuan baik Timur Tengah hingga Benua Eropa dan Amerika. Daffa Tour menawarkan paket – paket perjalanan ibadah yang berkualitas dan terjangkau sesuai dengan kebutuhan loyal customer, kami merencanakan setiap perjalanan dengan benefit dan kepastian keberangkatan dengan pendampingan Muthowif dan Tour Leader terbaik. Daffa Tour hadir dengan harapan akan memfasilitasi ibadah bagi para jamaah Umroh / Umroh VIP bagi setiap jamaah yang ingin mewujudkan beribadah di Tanah Suci dengan khusyu. Ditengah maraknya persaingan Bisnis Travel, kami berharap Daffa Tour akan tetap eksis bertahan dengan memperhatikan Good Service, Good Quality & Good Price (3G).',
+            legalTitle: 'Legal & Perizinan Usaha',
+            legalItems: [
+                'Akta Pendirian No. 20.- Tanggal 22 Februari 2013 (Notaris Junianto, SH. M.kn)',
+                'Akte Perubahan No. -17- Tanggal 10 September 2014 (Notaris Rose Takarina, S.H)',
+                'Akte Perubahan No. -7- Tanggal 10 Januari 2015 (Notaris Rose Takarina, S.H)',
+                'Akta Pernyataan Keputusan Sirkuler Para Pemegang Saham No. -56- Tanggal 25 September 2020 (Notaris Rose Takarina, S.H)',
+                'Akta Pernyataan Keputusan Sirkuler Para Pemegang Saham No. -5- Tanggal 3 Juni 2022 (Notaris Rose Takarina, S.H)',
+                'Tanda Daftar Perusahaan (TDP) No. 09.05.1.46.85 108',
+                'Surat Izin Usaha Perusahaan (SIUP) No. 00008/24.1.0/31.71-01.1003/1.824.271/2015',
+                'Surat Keterangan Domisili No. 832/27.1.0/31.71.06.1004/-071.562/2016',
+                'NPWP No. 71.519.960.0-029.000',
+                'Tanda Daftar Usaha Biro Perjalanan Wisata 45/14.11.0/31.71.06.1004/-1.858.8/2017',
+                'Undang-Undang Gangguan 253/26.1.0/31.71.01/-1.751.21/2015',
+                'Izin PPIU No. 02780100619940003 Tahun 2023'
+            ]
         }
     },
     ar: {
@@ -385,14 +435,20 @@ export const translations = {
             admin: 'مشرف',
             logout: 'تسجيل خروج',
             gallery: 'معرض الصور',
-            articles: 'مقالات'
+            articles: 'مقالات',
+            aboutTitle: 'مقدمة'
+        },
+        contact: {
+            tagline: 'اتصل بنا',
+            title: 'اتصل',
+            titleAccent: 'بنا',
         },
         hero: {
-            subtitle: 'رحلة من الصفاء والتفاني',
+            subtitle: 'Sahabat Perjalanan Anda',
             title: 'طريقك للتقرب إلى',
             titleAccent: 'الله سبحانه وتعالى',
-            description: 'جرب السلام الروحي والرعاية الشاملة. نحن نصيغ كل تفاصيل رحلة العمرة والحج الخاصة بك حتى تتمكن من التركيز على ما يهم حقًا - اتصالك بالخالق.',
-            cta: 'اكتشف قصتنا',
+            description: 'جرب السلام الروحي والرعاية الشاملة. نحن نصيغ كل تفاصيل رحلة العمرة والحج الخاصة بك حتى تقدر التركيز على ما يهم حقا - اتصالك بالخالق.',
+            cta: 'مقدمة',
             searchPlaceholder: 'إلى أين؟',
             categoryPlaceholder: 'كل الباقات',
             searchButton: 'بحث'
