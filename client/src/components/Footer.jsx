@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
-import logo from '../assets/logo/daffa_logo_main.png';
+import logo from '../assets/logo.jpg';
 
 const Footer = () => {
     return (
@@ -10,7 +10,7 @@ const Footer = () => {
                     {/* Brand Column */}
                     <div className="space-y-8">
                         <Link to="/" className="flex items-center space-x-4">
-                            <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white p-2 shadow-2xl">
+                            <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white p-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-secondary/20 transition-all duration-500">
                                 <img src={logo} alt="Daffa Travel" className="h-full w-full object-contain" />
                             </div>
                             <span className="text-2xl font-serif font-black tracking-[-0.05em] leading-none">

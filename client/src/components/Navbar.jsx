@@ -35,7 +35,7 @@ const Navbar = () => {
                     <div className="flex justify-between items-center">
                         <Link to="/" className="flex items-center space-x-3 md:space-x-4 group min-w-0 flex-shrink-0">
                             <div
-                                className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl overflow-hidden shadow-2xl group-hover:scale-105 transition-all duration-500 bg-white p-1 md:p-1.5 ring-1 ring-slate-100 flex-shrink-0"
+                                className="h-10 w-10 md:h-14 md:w-14 rounded-xl md:rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(196,155,90,0.15)] group-hover:shadow-[0_0_35px_rgba(196,155,90,0.3)] group-hover:scale-105 transition-all duration-500 bg-white p-1 md:p-1.5 ring-1 ring-slate-100 flex-shrink-0"
                                 style={{ minWidth: '40px', minHeight: '40px' }}
                             >
                                 <img
