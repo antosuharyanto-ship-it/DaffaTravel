@@ -113,7 +113,10 @@ model Testimony {
   content   String
   rating    Int      @default(5)
   imageUrl  String?
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
   packageId Int?
+  package   Package? @relation(fields: [packageId], references: [id])
   createdAt DateTime @default(now())
 }
 
