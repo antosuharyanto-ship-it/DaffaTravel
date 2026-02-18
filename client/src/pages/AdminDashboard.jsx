@@ -1,29 +1,25 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import { useLanguage } from '../context/LanguageContext';
-import { LayoutGrid, Package as PackageIcon, Users, Image as ImageIcon, Plus, Trash2, Edit2, AlertCircle, X, Check, TrendingUp, HandCoins, Sparkles } from 'lucide-react';
+import { LayoutGrid, Package as PackageIcon, Users, Image as ImageIcon, Plus, Trash2, Edit2, AlertCircle, X, Check, TrendingUp, HandCoins, Sparkles, FileText, MessageSquare, ShieldCheck, Star } from 'lucide-react';
 
 const AdminDashboard = () => {
     const { t, language } = useLanguage();
     const [stats, setStats] = useState({ packages: 0, bookings: 0, users: 0, totalSales: 0, agents: 0 });
     const [activeTab, setActiveTab] = useState('overview');
     const [packages, setPackages] = useState([]);
+    const [gallery, setGallery] = useState([]);
+    const [testimonials, setTestimonials] = useState([]);
+    const [articles, setArticles] = useState([]);
+    const [leads, setLeads] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddForm, setShowAddForm] = useState(false);
     const [editingId, setEditingId] = useState(null);
-    const [newPackage, setNewPackage] = useState({
-        title: '',
-        description: '',
-        price: '',
-        duration: '',
-        category: 'UMRAH',
-        availableSlots: 20,
-        startDate: '',
-        endDate: '',
-        image: '',
-        flyerImage: '',
-        hotelStars: 3
-    });
+    const [newPackage, setNewPackage] = useState({ title: '', description: '', price: '', duration: '', type: 'UMRAH', availableSlots: 20, startDate: '', endDate: '', image: '', flyerImage: '', hotelStars: 3 });
+    const [newGalleryItem, setNewGalleryItem] = useState({ imageUrl: '', caption: '', category: 'UMRAH' });
+    const [newTestimony, setNewTestimony] = useState({ name: '', content: '', rating: 5, imageUrl: '' });
+    const [newArticle, setNewArticle] = useState({ title: '', content: '', imageUrl: '' });
 
     useEffect(() => {
         fetchData();
@@ -36,10 +32,26 @@ const AdminDashboard = () => {
                 api.get('/transactions')
             ]);
             setPackages(pkgsRes.data);
+            try {
+                const [galleryRes, testimonialsRes, articlesRes, leadsRes, usersRes] = await Promise.all([
+                    api.get('/gallery'),
+                    api.get('/testimonials'),
+                    api.get('/articles'),
+                    api.get('/leads'),
+                    api.get('/auth/users')
+                ]);
+                setGallery(galleryRes.data);
+                setTestimonials(testimonialsRes.data);
+                setArticles(articlesRes.data);
+                setLeads(leadsRes.data);
+                setUsers(usersRes.data);
+            } catch (err) {
+                console.warn("Some data could not be fetched", err);
+            }
             setStats({
                 packages: pkgsRes.data.length,
                 bookings: bookingsRes.data.length,
-                users: new Set(bookingsRes.data.map(b => b.userId)).size // Unique users from bookings
+                users: new Set(bookingsRes.data.map(b => b.userId)).size
             });
         } catch (error) {
             console.error("Error fetching admin data", error);
@@ -98,6 +110,100 @@ const AdminDashboard = () => {
         setShowAddForm(true);
     };
 
+    const handleAddGalleryItem = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await api.post('/gallery', newGalleryItem);
+            setGallery([...gallery, res.data]);
+            setShowAddForm(false);
+            setNewGalleryItem({ imageUrl: '', caption: '', category: 'UMRAH' });
+        } catch (error) {
+            alert('Gallery addition failed');
+        }
+    };
+
+    const handleDeleteGalleryItem = async (id) => {
+        if (!window.confirm('Delete this image?')) return;
+        try {
+            await api.delete(`/gallery/${id}`);
+            setGallery(gallery.filter(item => item.id !== id));
+        } catch (error) {
+            alert('Delete failed');
+        }
+    };
+
+    const handleAddTestimony = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await api.post('/testimonials', newTestimony);
+            setTestimonials([...testimonials, res.data]);
+            setShowAddForm(false);
+            setNewTestimony({ name: '', content: '', rating: 5, imageUrl: '' });
+        } catch (error) {
+            alert('Testimony addition failed');
+        }
+    };
+
+    const handleDeleteTestimony = async (id) => {
+        if (!window.confirm('Delete this testimony?')) return;
+        try {
+            await api.delete(`/testimonials/${id}`);
+            setTestimonials(testimonials.filter(t => t.id !== id));
+        } catch (error) {
+            alert('Delete failed');
+        }
+    };
+
+    const handleAddArticle = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await api.post('/articles', newArticle);
+            setArticles([...articles, res.data]);
+            setShowAddForm(false);
+            setNewArticle({ title: '', content: '', imageUrl: '' });
+        } catch (error) {
+            alert('Article addition failed');
+        }
+    };
+
+    const handleDeleteArticle = async (id) => {
+        if (!window.confirm('Delete this article?')) return;
+        try {
+            await api.delete(`/articles/${id}`);
+            setArticles(articles.filter(a => a.id !== id));
+        } catch (error) {
+            alert('Delete failed');
+        }
+    };
+
+    const handleUpdateUserRole = async (userId, newRole) => {
+        try {
+            await api.put(`/auth/users/${userId}`, { role: newRole });
+            setUsers(users.map(u => u.id === userId ? { ...u, role: newRole } : u));
+        } catch (error) {
+            alert('Role update failed');
+        }
+    };
+
+    const handleUpdateLeadStatus = async (leadId, newStatus) => {
+        try {
+            await api.put(`/leads/${leadId}`, { status: newStatus });
+            setLeads(leads.map(l => l.id === leadId ? { ...l, status: newStatus } : l));
+        } catch (error) {
+            alert('Lead status update failed');
+        }
+    };
+
+    const handleDeleteLead = async (id) => {
+        if (!window.confirm('Delete this lead?')) return;
+        try {
+            await api.delete(`/leads/${id}`);
+            setLeads(leads.filter(l => l.id !== id));
+        } catch (error) {
+            alert('Delete failed');
+        }
+    };
+
     return (
         <div className={`min-h-screen bg-slate-50 pt-32 pb-20 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
             <div className="container mx-auto px-4">
@@ -131,6 +237,46 @@ const AdminDashboard = () => {
                         >
                             <Users size={20} className={language === 'ar' ? 'ml-3' : 'mr-3'} />
                             <span className="font-bold text-[13px] uppercase tracking-wider">{t('admin.bookings')}</span>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('gallery')}
+                            className={`w-full flex items-center px-4 py-3.5 rounded-2xl transition-all duration-300 ${activeTab === 'gallery' ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/20' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                            style={{ flexDirection: language === 'ar' ? 'row-reverse' : 'row' }}
+                        >
+                            <ImageIcon size={20} className={language === 'ar' ? 'ml-3' : 'mr-3'} />
+                            <span className="font-bold text-[13px] uppercase tracking-wider">Gallery</span>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('testimonials')}
+                            className={`w-full flex items-center px-4 py-3.5 rounded-2xl transition-all duration-300 ${activeTab === 'testimonials' ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/20' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                            style={{ flexDirection: language === 'ar' ? 'row-reverse' : 'row' }}
+                        >
+                            <MessageSquare size={20} className={language === 'ar' ? 'ml-3' : 'mr-3'} />
+                            <span className="font-bold text-[13px] uppercase tracking-wider">Testimonials</span>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('articles')}
+                            className={`w-full flex items-center px-4 py-3.5 rounded-2xl transition-all duration-300 ${activeTab === 'articles' ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/20' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                            style={{ flexDirection: language === 'ar' ? 'row-reverse' : 'row' }}
+                        >
+                            <FileText size={20} className={language === 'ar' ? 'ml-3' : 'mr-3'} />
+                            <span className="font-bold text-[13px] uppercase tracking-wider">Articles</span>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('leads')}
+                            className={`w-full flex items-center px-4 py-3.5 rounded-2xl transition-all duration-300 ${activeTab === 'leads' ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/20' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                            style={{ flexDirection: language === 'ar' ? 'row-reverse' : 'row' }}
+                        >
+                            <TrendingUp size={20} className={language === 'ar' ? 'ml-3' : 'mr-3'} />
+                            <span className="font-bold text-[13px] uppercase tracking-wider">Leads / Booked</span>
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('users')}
+                            className={`w-full flex items-center px-4 py-3.5 rounded-2xl transition-all duration-300 ${activeTab === 'users' ? 'bg-slate-900 text-white shadow-xl shadow-slate-900/20' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                            style={{ flexDirection: language === 'ar' ? 'row-reverse' : 'row' }}
+                        >
+                            <ShieldCheck size={20} className={language === 'ar' ? 'ml-3' : 'mr-3'} />
+                            <span className="font-bold text-[13px] uppercase tracking-wider">User Roles</span>
                         </button>
                     </aside>
 
@@ -375,51 +521,279 @@ const AdminDashboard = () => {
                             </div>
                         )}
 
-                        {activeTab === 'media' && (
-                            <div className="space-y-8 animate-fade-in">
+                        {activeTab === 'gallery' && (
+                            <div className="space-y-6">
                                 <div className={`flex justify-between items-center ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
-                                    <div>
-                                        <h1 className="text-4xl font-serif font-black text-slate-900">Media Library</h1>
-                                        <p className="text-slate-400 text-xs font-medium tracking-wide mt-1">Manage and select visual assets for your travel packages.</p>
-                                    </div>
-                                    <button className="bg-slate-900 text-white !py-2.5 !px-6 rounded-2xl flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest hover:bg-secondary transition-all shadow-xl shadow-slate-900/10 active:scale-95">
-                                        <Plus size={16} className={language === 'ar' ? 'ml-2' : 'mr-2'} />
-                                        <span>Upload New</span>
+                                    <h1 className="text-3xl font-serif font-black">Gallery Management</h1>
+                                    <button
+                                        onClick={() => setShowAddForm(!showAddForm)}
+                                        className="bg-slate-900 text-white !py-2.5 !px-6 rounded-2xl flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-xl shadow-slate-900/10"
+                                    >
+                                        {showAddForm ? <X size={16} /> : <Plus size={16} />}
+                                        <span>{showAddForm ? 'Cancel' : 'Add Image'}</span>
                                     </button>
                                 </div>
 
-                                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                                    {[
-                                        { url: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa', title: 'Sacred Kaaba' },
-                                        { url: 'https://images.unsplash.com/photo-1564769662533-4f00a87b4056', title: 'Grand Mosque' },
-                                        { url: 'https://images.unsplash.com/photo-1542810634-71277d95dcbb', title: 'Medina Evening' },
-                                        { url: 'https://images.unsplash.com/photo-1529626455594-4ff0832cfb5e', title: 'Kuala Lumpur' },
-                                        { url: 'https://images.unsplash.com/photo-1508933254924-8960091ca97e', title: 'Bangkok City' },
-                                        { url: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e', title: 'Kyoto Temple' },
-                                        { url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23', title: 'Spiritual Hero' },
-                                        { url: 'https://images.unsplash.com/photo-1524230572899-a752b3835840', title: 'Hajj Pilgrimage' }
-                                    ].map((asset, i) => (
-                                        <div key={i} className="group relative aspect-square rounded-3xl overflow-hidden bg-slate-100 border border-slate-100 hover:shadow-2xl transition-all duration-500 cursor-pointer">
-                                            <img src={`${asset.url}?auto=format&fit=crop&w=400&q=80`} alt={asset.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                                                <span className="text-white text-[10px] font-black uppercase tracking-widest leading-none">{asset.title}</span>
-                                                <div className="flex gap-2 mt-2">
-                                                    <button className="p-1.5 bg-white/20 hover:bg-white/40 rounded-lg text-white backdrop-blur-md transition-colors"><Edit2 size={12} /></button>
-                                                    <button className="p-1.5 bg-red-500/20 hover:bg-red-500/40 rounded-lg text-white backdrop-blur-md transition-colors"><Trash2 size={12} /></button>
-                                                </div>
+                                {showAddForm && (
+                                    <div className="glass-card !bg-white p-8 border-slate-100 shadow-2xl animate-slide-up mb-8">
+                                        <form onSubmit={handleAddGalleryItem} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Image URL</label>
+                                                <input required type="text" placeholder="https://..." className="w-full p-4 rounded-2xl border border-slate-100 outline-none" value={newGalleryItem.imageUrl} onChange={e => setNewGalleryItem({ ...newGalleryItem, imageUrl: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Category</label>
+                                                <select className="w-full p-4 rounded-2xl border border-slate-100 outline-none bg-white" value={newGalleryItem.category} onChange={e => setNewGalleryItem({ ...newGalleryItem, category: e.target.value })}>
+                                                    <option value="UMRAH">Umrah</option>
+                                                    <option value="HAJJ">Hajj</option>
+                                                    <option value="HOLIDAY">Holiday</option>
+                                                </select>
+                                            </div>
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Caption</label>
+                                                <input type="text" placeholder="Image description..." className="w-full p-4 rounded-2xl border border-slate-100 outline-none" value={newGalleryItem.caption} onChange={e => setNewGalleryItem({ ...newGalleryItem, caption: e.target.value })} />
+                                            </div>
+                                            <button type="submit" className="md:col-span-2 bg-slate-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest">Add to Gallery</button>
+                                        </form>
+                                    </div>
+                                )}
+
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                    {gallery.map(item => (
+                                        <div key={item.id} className="group relative aspect-square rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all">
+                                            <img src={item.imageUrl} alt={item.caption} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                                                <p className="text-white text-[10px] font-bold uppercase truncate">{item.caption}</p>
+                                                <button onClick={() => handleDeleteGalleryItem(item.id)} className="mt-2 text-red-400 hover:text-red-300 text-[10px] font-black">DELETE</button>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
+                            </div>
+                        )}
 
-                                <div className="p-10 glass-card !bg-slate-900 text-white rounded-3xl relative overflow-hidden">
-                                    <div className="absolute top-0 right-0 p-8 text-white/5 pointer-events-none">
-                                        <ImageIcon size={120} />
+                        {activeTab === 'testimonials' && (
+                            <div className="space-y-6">
+                                <div className={`flex justify-between items-center ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <h1 className="text-3xl font-serif font-black">Jamaah Testimonials</h1>
+                                    <button
+                                        onClick={() => setShowAddForm(!showAddForm)}
+                                        className="bg-slate-900 text-white !py-2.5 !px-6 rounded-2xl flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-xl shadow-slate-900/10"
+                                    >
+                                        {showAddForm ? <X size={16} /> : <Plus size={16} />}
+                                        <span>{showAddForm ? 'Cancel' : 'Add Testimony'}</span>
+                                    </button>
+                                </div>
+
+                                {showAddForm && (
+                                    <div className="glass-card !bg-white p-8 border-slate-100 shadow-2xl animate-slide-up mb-8">
+                                        <form onSubmit={handleAddTestimony} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Jamaah Name</label>
+                                                <input required type="text" placeholder="Full Name" className="w-full p-4 rounded-2xl border border-slate-100 outline-none" value={newTestimony.name} onChange={e => setNewTestimony({ ...newTestimony, name: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Rating</label>
+                                                <div className="flex gap-2">
+                                                    {[1, 2, 3, 4, 5].map(star => (
+                                                        <button key={star} type="button" onClick={() => setNewTestimony({ ...newTestimony, rating: star })} className={`flex-1 py-3 rounded-xl border ${newTestimony.rating === star ? 'bg-secondary text-white border-secondary' : 'bg-white border-slate-100'}`}>
+                                                            {star}★
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Testimony Content</label>
+                                                <textarea required rows="3" className="w-full p-4 rounded-2xl border border-slate-100 outline-none resize-none" value={newTestimony.content} onChange={e => setNewTestimony({ ...newTestimony, content: e.target.value })}></textarea>
+                                            </div>
+                                            <div className="md:col-span-2">
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Image URL (Optional)</label>
+                                                <input type="text" placeholder="https://..." className="w-full p-4 rounded-2xl border border-slate-100 outline-none" value={newTestimony.imageUrl} onChange={e => setNewTestimony({ ...newTestimony, imageUrl: e.target.value })} />
+                                            </div>
+                                            <button type="submit" className="md:col-span-2 bg-slate-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest">Post Testimony</button>
+                                        </form>
                                     </div>
-                                    <h3 className="text-2xl font-serif font-black mb-2 italic">Premium Assets Library</h3>
-                                    <p className="text-slate-400 text-sm max-w-xl font-light">
-                                        These high-resolution sacred and exotic travel assets are curated to match the **Daffa Tour & Travel** brand identity. Use them as flyers or Hero backgrounds for new packages.
-                                    </p>
+                                )}
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {testimonials.map(item => (
+                                        <div key={item.id} className="glass-card !bg-white p-6 border-slate-100 relative group">
+                                            <div className="flex items-center gap-4 mb-4">
+                                                {item.imageUrl ? (
+                                                    <img src={item.imageUrl} alt="" className="w-12 h-12 rounded-full object-cover" />
+                                                ) : (
+                                                    <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold">{item.name[0]}</div>
+                                                )}
+                                                <div>
+                                                    <div className="font-serif font-black text-slate-900">{item.name}</div>
+                                                    <div className="flex text-amber-400">
+                                                        {[...Array(item.rating)].map((_, i) => <Star key={i} size={12} fill="currentColor" />)}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p className="text-slate-600 text-sm leading-relaxed italic">"{item.content}"</p>
+                                            <button onClick={() => handleDeleteTestimony(item.id)} className="absolute top-4 right-4 p-2 text-slate-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100">
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                        {activeTab === 'articles' && (
+                            <div className="space-y-6">
+                                <div className={`flex justify-between items-center ${language === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <h1 className="text-3xl font-serif font-black">Articles / Blog</h1>
+                                    <button
+                                        onClick={() => setShowAddForm(!showAddForm)}
+                                        className="bg-slate-900 text-white !py-2.5 !px-6 rounded-2xl flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all shadow-xl shadow-slate-900/10"
+                                    >
+                                        {showAddForm ? <X size={16} /> : <Plus size={16} />}
+                                        <span>{showAddForm ? 'Cancel' : 'New Article'}</span>
+                                    </button>
+                                </div>
+
+                                {showAddForm && (
+                                    <div className="glass-card !bg-white p-8 border-slate-100 shadow-2xl animate-slide-up mb-8">
+                                        <form onSubmit={handleAddArticle} className="space-y-6">
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Title</label>
+                                                <input required type="text" className="w-full p-4 rounded-2xl border border-slate-100 outline-none" value={newArticle.title} onChange={e => setNewArticle({ ...newArticle, title: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Featured Image URL</label>
+                                                <input type="text" className="w-full p-4 rounded-2xl border border-slate-100 outline-none" value={newArticle.imageUrl} onChange={e => setNewArticle({ ...newArticle, imageUrl: e.target.value })} />
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Content</label>
+                                                <textarea required rows="10" className="w-full p-4 rounded-2xl border border-slate-100 outline-none resize-none font-mono text-sm" value={newArticle.content} onChange={e => setNewArticle({ ...newArticle, content: e.target.value })}></textarea>
+                                            </div>
+                                            <button type="submit" className="w-full bg-slate-900 text-white py-4 rounded-2xl font-black uppercase tracking-widest">Publish Article</button>
+                                        </form>
+                                    </div>
+                                )}
+
+                                <div className="space-y-4">
+                                    {articles.map(item => (
+                                        <div key={item.id} className="glass-card !bg-white p-6 border-slate-100 flex items-center gap-6 group">
+                                            {item.imageUrl && <img src={item.imageUrl} alt="" className="w-24 h-24 rounded-2xl object-cover" />}
+                                            <div className="flex-1">
+                                                <h3 className="font-serif font-black text-xl text-slate-900">{item.title}</h3>
+                                                <p className="text-slate-400 text-xs mt-1">Published on {new Date(item.createdAt).toLocaleDateString()}</p>
+                                            </div>
+                                            <button onClick={() => handleDeleteArticle(item.id)} className="p-3 text-slate-300 hover:text-red-500 transition-colors">
+                                                <Trash2 size={20} />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'users' && (
+                            <div className="space-y-6">
+                                <h1 className="text-3xl font-serif font-black">User Roles & Management</h1>
+                                <div className="overflow-x-auto rounded-3xl bg-white shadow-xl border border-slate-100">
+                                    <table className="w-full text-left">
+                                        <thead className="bg-slate-900 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                            <tr>
+                                                <th className="p-6">User</th>
+                                                <th className="p-6">Current Role</th>
+                                                <th className="p-6">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {users.map(user => (
+                                                <tr key={user.id} className="hover:bg-slate-50 transition-colors">
+                                                    <td className="p-6">
+                                                        <div className="font-bold text-slate-900">{user.name}</div>
+                                                        <div className="text-xs text-slate-400">{user.email}</div>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <span className={`px-3 py-1 rounded-full text-[10px] font-black tracking-widest ${user.role === 'ADMIN' ? 'bg-indigo-50 text-indigo-600' : user.role === 'AGENT' ? 'bg-amber-50 text-amber-600' : 'bg-slate-50 text-slate-600'}`}>
+                                                            {user.role}
+                                                        </span>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <select
+                                                            value={user.role}
+                                                            onChange={(e) => handleUpdateUserRole(user.id, e.target.value)}
+                                                            className="p-2 rounded-xl border border-slate-100 text-xs font-bold outline-none focus:border-secondary"
+                                                        >
+                                                            <option value="CUSTOMER">Customer</option>
+                                                            <option value="AGENT">Agent</option>
+                                                            <option value="ADMIN">Admin</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        )}
+                        {activeTab === 'leads' && (
+                            <div className="space-y-6">
+                                <h1 className="text-3xl font-serif font-black">Booked Interests / Leads</h1>
+                                <div className="overflow-x-auto rounded-3xl bg-white shadow-xl border border-slate-100">
+                                    <table className="w-full text-left">
+                                        <thead className="bg-slate-900 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                            <tr>
+                                                <th className="p-6">Lead / Contact</th>
+                                                <th className="p-6">Package / Date</th>
+                                                <th className="p-6">Status</th>
+                                                <th className="p-6">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {leads.map(lead => (
+                                                <tr key={lead.id} className="hover:bg-slate-50 transition-colors group">
+                                                    <td className="p-6">
+                                                        <div className="font-bold text-slate-900">{lead.name}</div>
+                                                        <div className="flex flex-col text-[10px] text-slate-500 mt-1 space-y-0.5">
+                                                            <span className="flex items-center"><Phone size={10} className="mr-1" /> {lead.phone}</span>
+                                                            <span className="flex items-center"><Mail size={10} className="mr-1" /> {lead.email}</span>
+                                                            <span className="flex items-center font-bold text-green-600"><MessageCircle size={10} className="mr-1" /> {lead.whatsapp}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <div className="text-sm font-black text-slate-700">{lead.package?.title || 'General Interest'}</div>
+                                                        <div className="text-xs text-slate-400 mt-1 flex items-center">
+                                                            <Calendar size={12} className="mr-1" /> {new Date(lead.preferredDate).toLocaleDateString()}
+                                                        </div>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <span className={`px-3 py-1 rounded-full text-[10px] font-black tracking-widest ${lead.status === 'COMPLETED' ? 'bg-green-50 text-green-600' : lead.status === 'FOLLOWED_UP' ? 'bg-amber-50 text-amber-600' : 'bg-slate-50 text-slate-600'}`}>
+                                                            {lead.status}
+                                                        </span>
+                                                    </td>
+                                                    <td className="p-6">
+                                                        <div className="flex items-center gap-3">
+                                                            <select
+                                                                value={lead.status}
+                                                                onChange={(e) => handleUpdateLeadStatus(lead.id, e.target.value)}
+                                                                className="p-2 rounded-xl border border-slate-100 text-xs font-bold outline-none focus:border-secondary bg-white"
+                                                            >
+                                                                <option value="PENDING">Pending</option>
+                                                                <option value="FOLLOWED_UP">Followed Up</option>
+                                                                <option value="COMPLETED">Completed</option>
+                                                            </select>
+                                                            <button onClick={() => handleDeleteLead(lead.id)} className="p-2 text-slate-300 hover:text-red-500 transition-colors">
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                            {leads.length === 0 && (
+                                                <tr>
+                                                    <td colSpan="4" className="p-20 text-center text-slate-400 font-serif italic text-xl">
+                                                        No interests recorded yet...
+                                                    </td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         )}

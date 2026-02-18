@@ -61,4 +61,29 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+const getUsers = async (req, res) => {
+    try {
+        const users = await prisma.user.findMany({
+            select: { id: true, name: true, email: true, role: true, createdAt: true }
+        });
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching users' });
+    }
+};
+
+const updateUserRole = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { role } = req.body;
+        const updatedUser = await prisma.user.update({
+            where: { id: parseInt(id) },
+            data: { role }
+        });
+        res.json(updatedUser);
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating user role' });
+    }
+};
+
+module.exports = { register, login, getUsers, updateUserRole };

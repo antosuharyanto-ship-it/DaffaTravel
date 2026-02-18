@@ -7,6 +7,10 @@ const packageRoutes = require('./routes/packages.routes');
 const branchRoutes = require('./routes/branches.routes');
 const transactionRoutes = require('./routes/transactions.routes');
 const chatbotRoutes = require('./routes/chatbot.routes');
+const galleryRoutes = require('./src/routes/gallery.routes');
+const testimonyRoutes = require('./src/routes/testimony.routes');
+const articleRoutes = require('./src/routes/article.routes');
+const leadRoutes = require('./routes/lead.routes');
 
 app.use(cors({
     origin: '*',
@@ -19,6 +23,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/branches', branchRoutes);
+app.use('/api/gallery', galleryRoutes);
+app.use('/api/testimonials', testimonyRoutes);
+app.use('/api/articles', articleRoutes);
+app.use('/api/leads', leadRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 

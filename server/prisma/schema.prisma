@@ -66,6 +66,21 @@ model Package {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   bookings    Booking[]
+  leads       Lead[]
+}
+
+model Lead {
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String
+  phone         String
+  whatsapp      String
+  preferredDate DateTime
+  packageId     Int?
+  package       Package? @relation(fields: [packageId], references: [id])
+  status        String   @default("PENDING") // PENDING, FOLLOWED_UP, COMPLETED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Booking {
@@ -80,4 +95,32 @@ model Booking {
   totalAmount   Decimal           @db.Decimal(20, 2)
   paymentProof  String?
   updatedAt     DateTime          @updatedAt
+}
+
+model Gallery {
+  id        Int      @id @default(autoincrement())
+  imageUrl  String
+  caption   String?
+  category  String?  // e.g., "UMRAH", "HAJJ", "HOLIDAY"
+  createdAt DateTime @default(now())
+}
+
+model Testimony {
+  id        Int      @id @default(autoincrement())
+  name      String
+  content   String
+  rating    Int      @default(5)
+  imageUrl  String?
+  packageId Int?
+  createdAt DateTime @default(now())
+}
+
+model Article {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.Text
+  imageUrl  String?
+  authorId  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

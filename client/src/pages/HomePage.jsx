@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import api from '../utils/api';
 import Hero from '../components/Hero';
 import CategorySection from '../components/CategorySection';
+import WhatsAppLink from '../components/WhatsAppLink';
 import WhyChooseUs from '../components/WhyChooseUs';
 import CampaignSpotlight from '../components/CampaignSpotlight';
 import PackageCard from '../components/PackageCard';
+import LeadForm from '../components/LeadForm';
 import { useLanguage } from '../context/LanguageContext';
 
 const HomePage = () => {
@@ -36,6 +38,7 @@ const HomePage = () => {
             <CategorySection />
             <WhyChooseUs />
             <CampaignSpotlight />
+            <LeadForm />
 
             <section className="container mx-auto px-4 py-24">
                 <div className="text-center max-w-3xl mx-auto mb-16">
@@ -70,6 +73,7 @@ const HomePage = () => {
                     </Link>
                 </div>
             </section>
+            <WhatsAppLink />
         </div>
     );
 };
