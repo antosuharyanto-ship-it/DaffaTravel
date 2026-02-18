@@ -11,8 +11,7 @@ export const translations = {
             admin: 'Admin',
             logout: 'Logout',
             gallery: 'Gallery',
-            articles: 'Articles',
-            aboutTitle: 'Introduction'
+            articles: 'Articles'
         },
         contact: {
             tagline: 'Get in Touch',
@@ -200,7 +199,12 @@ export const translations = {
             noReviews: 'Be the first to share your experience.'
         },
         about: {
+            tagline: 'SINCE 2009',
+            aboutTitle: 'Introduction',
+            titleAccent: 'Sacred Journey',
             description: 'Daffa Tours is part of PT. Anditi Kreasi Mandiri, dedicated to providing Umrah and VIP Umrah services with various incentive tours to enhance the devotion of your journey. We visit historical Islamic cities across the Middle East, Europe, and America. Daffa Tour offers high-quality, affordable packages tailored to loyal customers, ensuring every trip provides benefits and guaranteed departures with the best Mutawwif and Tour Leaders. Daffa Tour aims to facilitate worship for all pilgrims seeking to perform their rites in the Holy Land with full devotion. Amidst growing travel competition, we remain committed to our 3G philosophy: Good Service, Good Quality & Good Price (3G).',
+            valuesTitle: 'Our Core Principles',
+            valuesSubtitle: 'Everything we do is guided by a commitment to Islamic values and professional excellence.',
             legalTitle: 'Legal & Business Licensing',
             legalItems: [
                 'Deed of Incorporation No. 20.- Dated February 22, 2013 (Notary Junianto, SH. M.kn)',
@@ -230,8 +234,7 @@ export const translations = {
             admin: 'Admin',
             logout: 'Keluar',
             gallery: 'Galeri',
-            articles: 'Artikel',
-            aboutTitle: 'Tak Kenal Maka Tak Sayang'
+            articles: 'Artikel'
         },
         contact: {
             tagline: 'Hubungi Kami',
@@ -419,7 +422,12 @@ export const translations = {
             noReviews: 'Jadilah yang pertama membagikan pengalaman Anda.'
         },
         about: {
+            tagline: 'SEJAK 2009',
+            aboutTitle: 'Tak Kenal Maka Tak Sayang',
+            titleAccent: 'Perjalanan Suci',
             description: 'Daffa Tours adalah bagian dari PT. Anditi Kreasi Mandiri yang beroperasi untuk memberikan pelayanan ibadah Umroh / Umroh VIP dengan berbagai macam tour insentif yang dapat memperkuat kekhusuan ibadah perjalanan Anda, dengan berziarah mengunjungi kota – kota bersejarah umat Islam di berbagai tujuan baik Timur Tengah hingga Benua Eropa dan Amerika. Daffa Tour menawarkan paket – paket perjalanan ibadah yang berkualitas dan terjangkau sesuai dengan kebutuhan loyal customer, kami merencanakan setiap perjalanan dengan benefit dan kepastian keberangkatan dengan pendampingan Muthowif dan Tour Leader terbaik. Daffa Tour hadir dengan harapan akan memfasilitasi ibadah bagi para jamaah Umroh / Umroh VIP bagi setiap jamaah yang ingin mewujudkan beribadah di Tanah Suci dengan khusyu. Ditengah maraknya persaingan Bisnis Travel, kami berharap Daffa Tour akan tetap eksis bertahan dengan memperhatikan Good Service, Good Quality & Good Price (3G).',
+            valuesTitle: 'Prinsip Utama Kami',
+            valuesSubtitle: 'Segala sesuatu yang kami lakukan dipandu oleh komitmen terhadap nilai-nilai Islam dan keunggulan profesional.',
             legalTitle: 'Legal & Perizinan Usaha',
             legalItems: [
                 'Akta Pendirian No. 20.- Tanggal 22 Februari 2013 (Notaris Junianto, SH. M.kn)',
@@ -449,11 +457,15 @@ export const translations = {
             admin: 'مشرف',
             logout: 'تسجيل خروج',
             gallery: 'معرض الصور',
-            articles: 'مقالات',
-            aboutTitle: 'مقدمة'
+            articles: 'مقالات'
         },
         about: {
-            description: 'dafa tours is part of PT. Anditi Kreasi Mandiri, dedicated to providing Umrah and VIP Umrah services with various incentive tours to enhance the devotion of your journey. We visit historical Islamic cities across the Middle East, Europe, and America. Daffa Tour offers high-quality, affordable packages tailored to loyal customers, ensuring every trip provides benefits and guaranteed departures with the best Mutawwif and Tour Leaders. Daffa Tour aims to facilitate worship for all pilgrims seeking to perform their rites in the Holy Land with full devotion. Amidst growing travel competition, we remain committed to our 3G philosophy: Good Service, Good Quality & Good Price (3G).',
+            tagline: 'منذ عام 2009',
+            aboutTitle: 'مقدمة',
+            titleAccent: 'رحلتك المقدسة',
+            description: 'دافا تورز هي جزء من شركة PT. Anditi Kreasi Mandiri، مخصصة لتقديم خدمات العمرة والعمرة VIP مع جولات تحفيزية متنوعة لتعزيز التفاني في رحلتك. نزور المدن الإسلامية التاريخية في الشرق الأوسط وأوروبا وأمريكا. تقدم دافا تورز باقات عالية الجودة وبأسعار معقولة مصممة خصيصًا للعملاء الأوفياء، مما يضمن أن كل رحلة توفر فوائد ومغادرات مضمونة مع أفضل المطوفين وقادة الجولات. تهدف دافا تورز إلى تسهيل العبادة لجميع الحجاج الذين يسعون لأداء مناسكهم في الأراضي المقدسة بتفانٍ كامل. وفي ظل المنافسة المتزايدة في مجال السفر، نظل ملتزمين بفلسفة 3G الخاصة بنا: خدمة جيدة وجودة جيدة وسعر جيد (3G).',
+            valuesTitle: 'مبادئنا الأساسية',
+            valuesSubtitle: 'كل ما نقوم به يسترشد بالالتزام بالقيم الإسلامية والتميز المهني.',
             legalTitle: 'Commercial & Legal Licensing',
             legalItems: [
                 'Deed of Establishment No. 20.- Dated February 22, 2013 (Notary Junianto, SH. M.kn)',
